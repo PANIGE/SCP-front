@@ -3,6 +3,7 @@ import { Sprite } from "/storage/js/framework/objects/graphic/sprite.js";
 import { Container } from "/storage/js/framework/objects/graphic/container.js";
 import { Vector2, Color } from "/storage/js/framework/data.js";
 import {SpriteManager} from "/storage/js/framework/objects/SpriteManager.js";
+import {Scheduler} from "/storage/js/framework/objects/Scheduler.js"
 
 export class GameBase {
 
@@ -18,6 +19,7 @@ export class GameBase {
         this.SpriteManager = new SpriteManager();
         this.Running = true;
         this.MousePos = new Vector2(0,0);
+        this.Scheduler = new Scheduler();
     }
 
     GetRatioMultiplier() {

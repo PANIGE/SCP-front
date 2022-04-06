@@ -13,6 +13,7 @@ export class Scheduler {
                 return Expired.push(s);
             }
             else if (s.Time < Date.now() && !s.Done) {
+                s.Done = true;
                 if (s.Async)
                     setTimeout(s.Delegate, 0);
                 else

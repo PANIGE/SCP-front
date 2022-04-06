@@ -18,6 +18,8 @@ export class Game extends GameBase {
         cont.Add(sp1);
         cont.Add(sp2);
         this.SpriteManager.Add(cont);
+
+        this.Scheduler.AddDelayed(() => cont.MoveTo(new Vector2(0,0), 1550), 2500)
     }
 }
 
