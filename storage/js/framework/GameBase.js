@@ -51,7 +51,7 @@ export class GameBase {
     MainLoop() {
         GameBase.Instance.Canvas.style.height = 1080 * GameBase.Instance.GetRatioMultiplier() + "px";
         GameBase.Instance.Canvas.style.width = 1920 * GameBase.Instance.GetRatioMultiplier()+ "px";
-
+        GameBase.Instance.Scheduler.Update();
         GameBase.Instance.SpriteManager.Update();
 
     }

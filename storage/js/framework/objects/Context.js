@@ -1,4 +1,4 @@
-export class ContextObj {
+export class Context {
     constructor() {
         
     }
