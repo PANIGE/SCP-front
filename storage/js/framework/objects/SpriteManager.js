@@ -62,8 +62,10 @@ export class SpriteManager {
 
 
     Add(Sprite) {
+        if (this.sprites.indexOf(Sprite) != -1 || Sprite.Parent != undefined) {
+            throw "You may not add drawable to multiple containers"
+        }
         this.sprites.push(Sprite);
-        Sprite.Parent = this;
         Sprite.Load();
         this.sprites.sort(function(a, b) {
             if (a.Depth > b.Depth) return -1;

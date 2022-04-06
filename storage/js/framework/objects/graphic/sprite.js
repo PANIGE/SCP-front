@@ -26,7 +26,9 @@ export class Sprite extends Drawable {
             img.attributes.setNamedItem(element.attributes[index].cloneNode());
         }
         img.setAttribute("src", this.Texture);
-        element.parentNode.replaceChild(img, element);
+        if (element.parentNode != null)
+            element.parentNode.replaceChild(img, element);
+        return img;
         
     }
 }

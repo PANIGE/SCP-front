@@ -1,5 +1,6 @@
 import { cursor } from "/storage/js/framework/objects/graphic/cursor.js";
 import { Sprite } from "/storage/js/framework/objects/graphic/sprite.js";
+import { Container } from "/storage/js/framework/objects/graphic/container.js";
 import { Vector2, Color } from "/storage/js/framework/data.js";
 import {SpriteManager} from "/storage/js/framework/objects/SpriteManager.js";
 
@@ -43,18 +44,8 @@ export class GameBase {
 
         document.body.addEventListener('mousedown', () => this.SpriteManager.HandleClick(), true); 
 
-        let sprite = new cursor("cursor.png");
-        let sp2 = new Sprite(new Vector2(0,0), new Vector2(500,500), 0, 0, "https://gateway.deltada.sh/bm/beatmapset/3/thumb", 0.5, new Color(255,255,255) );
-        //sp2.MoveTo(new Vector2(500,500), 3000);
-        //sp2.RotateTo(180, 5000);
-        sp2.OnHover = () => {
-            sp2.SizeTo(new Vector2(600, 600), 100);
-        }
-        sp2.OnHoverLost = () => {
-            sp2.SizeTo(new Vector2(500, 500), 100)
-        }
-        this.SpriteManager.Add(sprite);
-        this.SpriteManager.Add(sp2);
+
+        
     }
 
     MainLoop() {

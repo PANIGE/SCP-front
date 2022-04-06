@@ -112,7 +112,7 @@ export class Drawable {
         this.Alpha = Alpha;
         this.Color = Color;
         this.Transforms = [];
-        this.Parent = null;
+        this.Parent = undefined;
         this.isHovered = false;
         this.BlocksHover = false;
     }
@@ -141,7 +141,8 @@ export class Drawable {
         this.ApplyTransforms();
         let element = document.createElement("div");
         element.ondragstart = () => { return false; };
-        GameBase.Instance.Canvas.appendChild(element);
+        if (this.Parent == undefined)
+            GameBase.Instance.Canvas.appendChild(element);
         
         element.style.height = this.Size.Y * GameBase.Instance.GetRatioMultiplier() + "px";
         element.style.width = this.Size.X * GameBase.Instance.GetRatioMultiplier() + "px";
