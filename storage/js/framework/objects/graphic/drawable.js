@@ -152,6 +152,8 @@ export class Drawable {
         (this.EffectivePosition.Y - this.Size.Y > 1080 || this.EffectivePosition.Y + this.Size.Y < 0)) && !this.AlwaysPresent) {
             return;
         }
+
+        
         let element = document.createElement("div");
         element.ondragstart = () => { return false; };
         if (this.Parent == undefined) 
