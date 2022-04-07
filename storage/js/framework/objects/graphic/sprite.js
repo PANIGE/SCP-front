@@ -21,10 +21,13 @@ export class Sprite extends Drawable {
 
     Draw() {
         let element = super.Draw();
+        if (element == null)
+            return;
         let img = document.createElement("img");
         for (let index = element.attributes.length - 1; index >= 0; --index) {
             img.attributes.setNamedItem(element.attributes[index].cloneNode());
         }
+        img.style.imageRendering = "pixelated";
         img.setAttribute("src", this.Texture);
         if (element.parentNode != null)
             element.parentNode.replaceChild(img, element);

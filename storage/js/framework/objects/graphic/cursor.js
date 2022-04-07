@@ -15,6 +15,7 @@ export class cursor extends Sprite {
     }
 
     Update() {
+        //console.log(GameBase.Instance.MousePos)
         this.Position = new Vector2(GameBase.Instance.MousePos.X - this.Size.X/2,GameBase.Instance.MousePos.Y - this.Size.Y/2) ;
     }
 

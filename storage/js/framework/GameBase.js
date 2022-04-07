@@ -10,16 +10,17 @@ export class GameBase {
     static Instance; //For Singleton
     SpriteManager;
     Scheduler;
-    Context;
     Canvas;
     Running;
     MousePos;
+    PressedKeys;
 
     constructor() {
         this.SpriteManager = new SpriteManager();
         this.Running = true;
         this.MousePos = new Vector2(0,0);
         this.Scheduler = new Scheduler();
+        this.PressedKeys = {};
     }
 
     GetRatioMultiplier() {
@@ -46,13 +47,25 @@ export class GameBase {
 
         document.body.addEventListener('mousedown', () => this.SpriteManager.HandleClick(), true); 
 
+        document.body.addEventListener('keydown', (event) => {
+            this.PressedKeys[event.key] = true;
+        });
 
+        document.addEventListener('keyup', (event) => {
+            delete this.PressedKeys[event.key];
+        });
+        
         
     }
+
+
 
     MainLoop() {
         GameBase.Instance.Canvas.style.height = 1080 * GameBase.Instance.GetRatioMultiplier() + "px";
         GameBase.Instance.Canvas.style.width = 1920 * GameBase.Instance.GetRatioMultiplier()+ "px";
+        
+        
+
         GameBase.Instance.Scheduler.Update();
         GameBase.Instance.SpriteManager.Update();
 

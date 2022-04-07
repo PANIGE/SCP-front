@@ -21,7 +21,14 @@ export class Drawable {
 
     BlocksHover;
 
-    get EffectivePosition() {
+    AlwaysPresent; //Blocks Object Container Streaming
+
+
+    get Scheduler() {
+        return GameBase.Instance.Scheduler;
+    }
+
+    get EffectivePosition() { //Get the effective position of the drawable in the field
         if (this.Parent == null) {
             return this.Position;
         }
@@ -139,18 +146,24 @@ export class Drawable {
 
     Draw() {
         this.ApplyTransforms();
+        //Calculate if the drawable is outside the screen, if so, cancel drawing, that's called Object Container Streaming (OCS)
+        if (((this.EffectivePosition.X > 1920 || this.EffectivePosition.X + this.Size.X < 0)
+        ||
+        (this.EffectivePosition.Y - this.Size.Y > 1080 || this.EffectivePosition.Y + this.Size.Y < 0)) && !this.AlwaysPresent) {
+            return;
+        }
         let element = document.createElement("div");
         element.ondragstart = () => { return false; };
-        if (this.Parent == undefined)
+        if (this.Parent == undefined) 
             GameBase.Instance.Canvas.appendChild(element);
         
         element.style.height = this.Size.Y * GameBase.Instance.GetRatioMultiplier() + "px";
         element.style.width = this.Size.X * GameBase.Instance.GetRatioMultiplier() + "px";
 
-        element.style.position = "absolute"
+        element.style.position = "absolute";
         
-        element.style.top = this.EffectivePosition.Y * GameBase.Instance.GetRatioMultiplier() + "px";
-        element.style.left = this.EffectivePosition.X * GameBase.Instance.GetRatioMultiplier() + "px";
+        element.style.top = this.Position.Y * GameBase.Instance.GetRatioMultiplier() + "px";
+        element.style.left = this.Position.X * GameBase.Instance.GetRatioMultiplier() + "px";
         
         element.style.opacity = this.Alpha;
         element.style.transform = "rotate(" + this.Rotation + "deg)";

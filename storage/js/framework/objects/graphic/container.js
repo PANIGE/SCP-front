@@ -39,9 +39,15 @@ export class Container extends Drawable {
 
     
     Draw() {
+
         let container = super.Draw();
+        if (container == null)
+            return null;
         this.Children.forEach(s => {
             let drawable = s.Draw();
+            if (drawable == null) {
+                return;
+            }
             container.appendChild(drawable);
         });
         return container;

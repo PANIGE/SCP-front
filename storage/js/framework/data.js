@@ -15,6 +15,10 @@ export class Vector2 {
         Vec.Y = v1.Y + (v2.Y - v1.Y)*ratio;
         return Vec;
     }
+
+    static get Zero() {
+        return new Vector2(0,0);
+    }
 }
 
 
