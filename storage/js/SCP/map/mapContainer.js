@@ -11,7 +11,7 @@ export class MapContainer extends Container {
     constructor() {
         super(Vector2.Zero, Vector2.Zero, 5, 0, 1, Color.White);
         this.Tiles = [];
-        this.TileSize = 70;
+        this.TileSize = 100;
         this.AlwaysPresent = true;
     }
 

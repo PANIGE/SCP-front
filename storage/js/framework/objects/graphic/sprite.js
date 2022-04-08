@@ -6,13 +6,7 @@ export class Sprite extends Drawable {
 
     Texture; // String to image
 
-    get EffectivePosition() {
-        if (this.Parent == null) {
-            return this.Position;
-        }
-        return new Vector2(this.Parent.EffectivePosition.X + this.Position.X, 
-            this.Parent.EffectivePosition.Y + this.Position.Y)
-    }
+
 
     constructor(Position, Size, Depth, Rotation, Texture, Alpha, Color) {
         super(Position, Size, Depth, Rotation, Alpha, Color);

@@ -33,7 +33,6 @@ export function MapParser(mapCont, txt) {
                     if (tex.hasOwnProperty(e)) {
                         if (tex[e].toLowerCase().startsWith("spawn/")) {
                             GameBase.Instance.Context.PlayerPosition = new Vector2(x*mapCont.TileSize + mapCont.TileSize/2, y*mapCont.TileSize + mapCont.TileSize/2);
-                            console.log(GameBase.Instance.Context.PlayerPosition, new Vector2(x, y))
                             mapCont.AddTile(new Tile(tex[tex[e].split("/")[1]]), new Vector2(x, y));
                         }
                         else {

@@ -14,6 +14,9 @@ export class GameBase {
     Running;
     MousePos;
     PressedKeys;
+    NewPressedKeys;
+    cache;
+    LastFrame;
 
     constructor() {
         this.SpriteManager = new SpriteManager();
@@ -21,6 +24,10 @@ export class GameBase {
         this.MousePos = new Vector2(0,0);
         this.Scheduler = new Scheduler();
         this.PressedKeys = {};
+        this.NewPressedKeys = {};
+        this.cache = [];
+        this.LastFrame =  Date.now();
+        this.FrameTime = 16;
     }
 
     GetRatioMultiplier() {
@@ -31,13 +38,19 @@ export class GameBase {
         return val;
     }
 
+    Cache(src) {
+        //The cache is here to preload image and avoid browser to unlaod them
+        var img=new Image();
+        img.src=src;
+        this.cache.push(img);
+    }
+
     Load(e) {
         GameBase.Instance = this;
         this.Canvas = e;
         console.log(this.GetRatioMultiplier());
-
-        setInterval(this.MainLoop, 16);
         
+        this.Canvas.addEventListener('contextmenu', event => event.preventDefault());
         this.Canvas.addEventListener('mousemove', (e) => {
             var rect = this.Canvas.getBoundingClientRect();
             this.MousePos.X = Math.round((e.clientX - rect.left) * (1/this.GetRatioMultiplier()));
@@ -48,26 +61,29 @@ export class GameBase {
         document.body.addEventListener('mousedown', () => this.SpriteManager.HandleClick(), true); 
 
         document.body.addEventListener('keydown', (event) => {
-            this.PressedKeys[event.key] = true;
+            this.PressedKeys[event.key.toLowerCase()] = true;
+            this.NewPressedKeys[event.key.toLowerCase()] = true;
         });
 
         document.addEventListener('keyup', (event) => {
-            delete this.PressedKeys[event.key];
+            delete this.PressedKeys[event.key.toLowerCase()];
         });
-        
+        setInterval(this.MainLoop, 0);
         
     }
 
+    HandleEvents() {
+        this.NewPressedKeys = {};
+    }
 
 
     MainLoop() {
+        
         GameBase.Instance.Canvas.style.height = 1080 * GameBase.Instance.GetRatioMultiplier() + "px";
         GameBase.Instance.Canvas.style.width = 1920 * GameBase.Instance.GetRatioMultiplier()+ "px";
-        
-        
-
+        GameBase.Instance.HandleEvents();
         GameBase.Instance.Scheduler.Update();
         GameBase.Instance.SpriteManager.Update();
-
+        
     }
 }
