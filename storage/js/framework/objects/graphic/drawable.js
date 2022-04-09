@@ -144,7 +144,7 @@ export class Drawable {
         //Empty for drawable since it's a base class
     }
 
-    Draw() {
+    Draw(cat="div") {
         this.ApplyTransforms();
         //Calculate if the drawable is outside the screen, if so, cancel drawing, that's called Object Container Streaming (OCS)
         if (((this.EffectivePosition.X > 1920 || this.EffectivePosition.X + this.Size.X < 0)
@@ -154,7 +154,7 @@ export class Drawable {
         }
 
         
-        let element = document.createElement("div");
+        let element = document.createElement(cat);
         element.ondragstart = () => { return false; };
         if (this.Parent == undefined) 
             GameBase.Instance.Canvas.appendChild(element);

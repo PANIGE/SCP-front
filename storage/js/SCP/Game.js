@@ -8,16 +8,15 @@ import { Tile } from "/storage/js/SCP/map/Tile.js";
 import { MapParser } from "/storage/js/scp/map/parser.js"
 import { Context } from "/storage/js/SCP/Context.js";
 import { Player } from "/storage/js/SCP/Entities/player.js";
+import { OverlayManager } from "/storage/js/SCP/Overlays/OverlayManager.js";
 
 
 export class Game extends GameBase {
     Context;
-    FrameRate;
-    FrameTimeSprite;
+    Overlays;
 
     Load(canvas) {
-        this.FrameRate = new SpriteText(Vector2.Zero, new Vector2(100,20), -4, 0, "0Fps", "Arial", 1, Color.White)
-        this.FrameTimeSprite = new SpriteText(new Vector2(0,20), new Vector2(100,20), -4, 0, "0ms", "Arial", 1, Color.White)
+
         super.Load(canvas);
         this.Context = new Context();
 
@@ -36,28 +35,45 @@ export class Game extends GameBase {
         this.SpriteManager.Add(this.Context.Player);
         this.SpriteManager.Add(cont);
 
-
-        //Debug Purpose
-        this.SpriteManager.Add(this.FrameRate);
-        this.SpriteManager.Add(this.FrameTimeSprite);
-
+        this.Overlays = new OverlayManager();
+        this.SpriteManager.Add(this.Overlays);
     
     }
 
 
     HandleEvents() {
-        this.FrameRate.Text = `FPS: ${Math.floor(1000/(Date.now() - this.LastFrame))}fps `;
-        this.FrameTimeSprite.Text = `FrameTime: ${Math.floor((Date.now() - this.LastFrame))}ms `;
+        let FrameTime = Math.floor((Date.now() - this.LastFrame));
+        this.Overlays.FrameRate.Text = `FPS: ${Math.floor(1000/(Date.now() - this.LastFrame))}fps `;
+        this.Overlays.FrameTimeSprite.Text = `FrameTime: ${FrameTime}ms `;
         let speed = ((Date.now() - this.LastFrame) / 16) * 5;
         this.LastFrame = Date.now();
         let keys = this.PressedKeys;
-
         if (this.NewPressedKeys.f) {
             this.Context.Player.FlashLight = !this.Context.Player.FlashLight;
         }
+        
+        if (keys[" "]) {
+            this.Context.BlinkTime = -2;
+        }
+        else {
+            this.Context.BlinkTime -= (FrameTime) / 60;
+            if (this.Context.BlinkTime < -2) {
+                this.Context.BlinkTime = 100
+            } 
+        }
+
 
         if (keys.shift) {
-            speed = speed*2;
+            if (this.Context.Endurance > 0) {
+                speed = speed*2;
+                this.Context.Endurance -= (FrameTime) / 30;
+            }
+            
+        }
+        else {
+            if (this.Context.Endurance <= 100)
+                this.Context.Endurance += (FrameTime) / 90;
+            
         }
         
         if (keys.z) {

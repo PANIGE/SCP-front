@@ -15,20 +15,13 @@ export class SpriteText extends Drawable {
     }
 
     Draw() {
-        let element = super.Draw();
-        if (element == null)
+        let txt = super.Draw("p");
+        if (txt == null)
             return;
-        let txt = document.createElement("p");
-        for (let index = element.attributes.length - 1; index >= 0; --index) {
-            txt.attributes.setNamedItem(element.attributes[index].cloneNode());
-        }
         txt.style.fontFamily = this.Font;
         txt.innerHTML = this.Text;
-        txt.style.fontSize = this.Size.Y;
+        txt.style.fontSize = this.Size.Y * GameBase.Instance.GetRatioMultiplier();
         txt.style.color = `rgb(${this.Color.R}, ${this.Color.G}, ${this.Color.B})`;
-        
-        if (element.parentNode != null)
-            element.parentNode.replaceChild(txt, element);
         return txt;
         
     }
