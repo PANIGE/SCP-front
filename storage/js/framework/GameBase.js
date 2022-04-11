@@ -25,7 +25,7 @@ export class GameBase {
         this.Scheduler = new Scheduler();
         this.PressedKeys = {};
         this.NewPressedKeys = {};
-        this.cache = [];
+        this.cache = {"img" : [], "col" : {}};
         this.LastFrame =  Date.now();
         this.FrameTime = 16;
     }
@@ -42,7 +42,7 @@ export class GameBase {
         //The cache is here to preload image and avoid browser to unlaod them
         var img=new Image();
         img.src=src;
-        this.cache.push(img);
+        this.cache["img"].push(img);
     }
 
     Load(e) {

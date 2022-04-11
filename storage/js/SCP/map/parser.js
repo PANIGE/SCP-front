@@ -47,3 +47,21 @@ export function MapParser(mapCont, txt) {
         }
     }
 }
+
+export function ParseColliders(tile, txt) {
+
+    console.log(txt)
+    let toParse = txt.split("\n");
+    for (let y = 0; y < toParse.length; y++) {
+        let line = toParse[y];
+        let v = line.split('');
+        let x = 0;
+        v.forEach(e => {
+            if (e != " ") {
+                tile.AddCollider(new Vector2(x, y));
+            }
+            x++;
+        });
+    }
+
+}

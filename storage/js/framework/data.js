@@ -107,3 +107,29 @@ export class Transform {
         return state;
     }
 }
+
+//Rectangle is basically a data structure that represents a rectangle... yeah it's logic
+export class Rectangle {
+    Position;
+    Size;
+    constructor(Position, Size) {
+        this.Position = Position;
+        this.Size = Size;
+    }
+
+    get X() {
+        return this.Position.X;
+    }
+
+    get Y() {
+        return this.Position.Y;
+    }
+
+    get Width() {
+        return this.Size.X;
+    }
+
+    get Height() {
+        return this.Size.Y;
+    }
+}

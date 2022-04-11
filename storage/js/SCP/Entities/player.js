@@ -20,9 +20,15 @@ export class Player extends Container {
     FlashLight;
     FoV;
     Preload;
+    pSize;
+    ViewTriangle;
     constructor() {
+        
         let size = 90;
         super(new Vector2(960-(size/2), 540-(size/2)), new Vector2(size, size), -1, 0, 1, Color.White);
+
+
+        this.pSize = size;
 
         this.Add(new Sprite(Vector2.Zero,new Vector2(size, size), -1, 0, "/storage/img/guard.png", 1, Color.White));
         this.FoV = new Sprite(new Vector2(-1500 + size/2,-1500+size/2),new Vector2(3000,3000), 1, 0, "/storage/img/FoV.png", 0.9, Color.White);
@@ -39,7 +45,7 @@ export class Player extends Container {
     Update() {
         let t = Math.floor(find_angle(new Vector2(960, 0), GameBase.Instance.MousePos, new Vector2(960, 540)));
         if (GameBase.Instance.MousePos.X < 960) {
-            this.Rotation = 0-t
+            this.Rotation = 360-t
         }
         else {
             this.Rotation = t
@@ -50,6 +56,17 @@ export class Player extends Container {
         else {
             this.FoV.Texture = "/storage/img/FoV.png";
         }
+        
+        let angRadL = (this.Rotation - 45 - 90) *(Math.PI/180);
+        let angRadR = (this.Rotation + 45 - 90)*(Math.PI/180) ;
+        let dist = this.FlashLight? 2000 : 300;
+        let playerPos = GameBase.Instance.Context.PlayerPosition;
+        this.ViewTriangle = {
+            "c" : GameBase.Instance.Context.PlayerPosition,
+            "p1" : new Vector2(playerPos.X + Math.cos(angRadL)*dist, playerPos.Y + Math.sin(angRadL)*dist),
+            "p2" : new Vector2(playerPos.X + Math.cos(angRadR)*dist, playerPos.Y + Math.sin(angRadR)*dist),
+        }
+        
         
     }
 }

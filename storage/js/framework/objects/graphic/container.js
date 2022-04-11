@@ -14,6 +14,10 @@ export class Container extends Drawable {
     }
 
 
+    Update() {
+        this.Children.forEach(s => s.Update());
+    }
+
     Add(Child){
         if (Child.Parent != undefined || GameBase.Instance.SpriteManager.sprites.indexOf(Child) != -1) {
             throw "You may not add drawable to multiple containers";

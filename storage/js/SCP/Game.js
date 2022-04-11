@@ -8,37 +8,45 @@ import { Tile } from "/storage/js/SCP/map/Tile.js";
 import { MapParser } from "/storage/js/scp/map/parser.js"
 import { Context } from "/storage/js/SCP/Context.js";
 import { Player } from "/storage/js/SCP/Entities/player.js";
+import { SCP173 } from "/storage/js/SCP/Entities/SCP/173.js";
 import { OverlayManager } from "/storage/js/SCP/Overlays/OverlayManager.js";
 
 
 export class Game extends GameBase {
     Context;
     Overlays;
+    Map;
 
     Load(canvas) {
 
         super.Load(canvas);
+        
         this.Context = new Context();
 
         let sprite = new cursor("cursor.png");
         this.SpriteManager.Add(sprite);
 
 
-        let cont = new MapContainer();
+        this.Map = new MapContainer();
         
         let raw;
         fetch('/storage/scp.map').then(response => response.text()).then(text => {
             raw = text;
-            MapParser(cont, raw)
+            MapParser(this.Map, raw)
         });
         this.Context.Player = new Player();
         this.SpriteManager.Add(this.Context.Player);
-        this.SpriteManager.Add(cont);
+        this.SpriteManager.Add(this.Map);
 
         this.Overlays = new OverlayManager();
         this.SpriteManager.Add(this.Overlays);
+
+        this.Map.Add(new SCP173(new Vector2(1000,700)))
     
     }
+    
+
+    
 
 
     HandleEvents() {
@@ -51,9 +59,9 @@ export class Game extends GameBase {
         if (this.NewPressedKeys.f) {
             this.Context.Player.FlashLight = !this.Context.Player.FlashLight;
         }
-        
+
         if (keys[" "]) {
-            this.Context.BlinkTime = -2;
+            this.Context.BlinkTime = 0;
         }
         else {
             this.Context.BlinkTime -= (FrameTime) / 60;
@@ -77,16 +85,25 @@ export class Game extends GameBase {
         }
         
         if (keys.z) {
-            this.Context.PlayerPosition.Y -= speed;
+            if (!this.Map.Collide(this.Context.PlayerPosition,0-speed, true)) {
+                this.Context.PlayerPosition.Y -= speed;
+            }
+            
         }
         if (keys.s) {
-            this.Context.PlayerPosition.Y += speed;
+            if (!this.Map.Collide(this.Context.PlayerPosition, speed, true)) {
+                this.Context.PlayerPosition.Y += speed;
+            }
         }
         if (keys.q) {
-            this.Context.PlayerPosition.X -= speed;
+            if (!this.Map.Collide(this.Context.PlayerPosition,0-speed, false)) {
+                this.Context.PlayerPosition.X -= speed;
+            }
         }
         if (keys.d) {
-            this.Context.PlayerPosition.X += speed;
+            if (!this.Map.Collide(this.Context.PlayerPosition,speed, false)) {
+                this.Context.PlayerPosition.X += speed;
+            }
         }
         super.HandleEvents();
     }

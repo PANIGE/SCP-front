@@ -36,6 +36,10 @@ export class Drawable {
             this.Parent.EffectivePosition.Y + this.Position.Y)
     }
 
+    get CenterPosition() {
+        return new Vector2(this.Position.X + this.Size.X/2, this.Position.Y + this.Size.Y/2)
+    }
+
 /* -------------------------------------------------------------------------- */
 /*                             Transforms section                             */
 /* -------------------------------------------------------------------------- */
@@ -92,6 +96,7 @@ export class Drawable {
     ClearTransforms() {
         this.Transforms = [];
     }
+    
 
     FinishTransforms() { //Put all transforms to their final state and clear
         
@@ -194,4 +199,19 @@ export class Drawable {
     }
 
 
+    get X() {
+        return this.Position.X;
+    }
+
+    get Y() {
+        return this.Position.Y;
+    }
+
+    get Width() {
+        return this.Size.X;
+    }
+
+    get Height() {
+        return this.Size.Y;
+    }
 }
