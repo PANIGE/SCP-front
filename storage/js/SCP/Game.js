@@ -17,8 +17,10 @@ export class Game extends GameBase {
     Overlays;
     Map;
 
-    Load(canvas) {
+    Focused;
 
+    Load(canvas) {
+        this.Focused = undefined;
         super.Load(canvas);
         
         this.Context = new Context();
@@ -41,7 +43,7 @@ export class Game extends GameBase {
         this.Overlays = new OverlayManager();
         this.SpriteManager.Add(this.Overlays);
 
-        this.Map.Add(new SCP173(new Vector2(3700,2500)))
+        this.Map.Add(new SCP173(new Vector2(4440,8500)))
     
     }
     
@@ -58,6 +60,9 @@ export class Game extends GameBase {
         let keys = this.PressedKeys;
         if (this.NewPressedKeys.f) {
             this.Context.Player.FlashLight = !this.Context.Player.FlashLight;
+        }
+        if (this.NewPressedKeys.e && this.Focused != undefined) {
+            this.Focused.Interract();
         }
 
         if (keys[" "]) {

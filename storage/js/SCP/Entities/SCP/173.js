@@ -43,8 +43,11 @@ export class SCP173 extends SCPBase
    
 
     WasMoving;
+    WasInSight;
+
     JumpScareSound;
     NearSound;
+    SpottedSound;
 
     Wandering
     constructor(position) {
@@ -53,8 +56,10 @@ export class SCP173 extends SCPBase
         super(position,new Vector2(size, size), "/storage/img/scp/173.png");
         GameBase.Instance.Cache("/storage/img/scp/173.png");
         this.WasMoving = false;
+        this.WasInSight = false;
         this.JumpScareSound = new Audio("/storage/sounds/scp/173/JumpScare.ogg");
         this.NearSound = new Audio("/storage/sounds/scp/173/Nearing.ogg");
+        this.SpottedSound = new Audio("/storage/sounds/scp/173/Spotted.ogg");
 
         this.Wandering = [
             new Audio("/storage/sounds/scp/173/Wandering1.ogg"),
@@ -72,7 +77,12 @@ export class SCP173 extends SCPBase
         if (isNaN(vol)) {
             vol = 0.5;
         }
-        this.Wandering.forEach(s => s.volume = vol)
+        this.Wandering.forEach(s => s.volume = vol);
+
+        if (!this.WasInSight && (this.IsInSight && this.HasInSight)) {
+            this.SpottedSound.play();
+        }
+        this.WasInSight = this.IsInSight;
 
         super.Update();
         if (Math.random()*1000 < 5) {
@@ -117,8 +127,7 @@ export class SCP173 extends SCPBase
          
             
             this.WasMoving = true;
-        }
-        /*
+        }/*
         else if (!this.HasInSight) {
             
 
@@ -143,8 +152,7 @@ export class SCP173 extends SCPBase
             this.Position = new Vector2(this.Position.X+Math.cos(angle)*speed,this.Position.Y + Math.sin(angle)*speed);
             this.WasMoving = true;
             
-        }
-        */
+        }*/
        //Remove the fact that SCP 173 can track players... becuz with his gameplay, it would be TOO HARD for the player to survive 173
     }
 

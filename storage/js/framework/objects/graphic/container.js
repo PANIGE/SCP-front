@@ -13,7 +13,6 @@ export class Container extends Drawable {
         this.Masking = false;
     }
 
-
     Update() {
         this.Children.forEach(s => s.Update());
     }
@@ -47,6 +46,9 @@ export class Container extends Drawable {
         let container = super.Draw();
         if (container == null)
             return null;
+        if (this.Masking) {
+            container.style.overflow = "hidden";
+        }
         this.Children.forEach(s => {
             let drawable = s.Draw();
             if (drawable == null) {

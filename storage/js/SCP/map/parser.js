@@ -40,6 +40,10 @@ export function MapParser(mapCont, txt) {
                         }
                         
                     }
+                    else {
+                        
+                        mapCont.AddTile(new Tile("/storage/img/rooms/emptyCollider.png"), new Vector2(x, y));
+                    }
                     x++;
                 });
                 y++;
@@ -50,19 +54,36 @@ export function MapParser(mapCont, txt) {
 
 export function ParseColliders(tile, txt) {
 
-    console.log(txt)
     let toParse = txt.split("\n");
+    let mode = "colliders";
     for (let y = 0; y < toParse.length; y++) {
         let line = toParse[y];
-        let v = line.split('');
         let x = 0;
-        v.forEach(e => {
-            if (e == "0") {
-                console.log(e)
-                tile.AddCollider(new Vector2(x, y));
-            }
-            x++;
-        });
+        let v;
+        if (line.startsWith("---")) {
+            mode = "doors";
+            continue;
+        }
+        switch (mode) {
+            case "colliders":
+                v = line.split('');
+                v.forEach(e => {
+                    if (e == "0") {
+                        tile.AddCollider(new Vector2(x, y));
+                    }
+                    x++;
+                });
+                break;
+            case "doors":
+                v = line.split(';')
+                let pos = new Vector2(parseInt(v[0].split(":")[0]), parseInt(v[0].split(":")[1]));
+                let vertical = v[1].toLowerCase().startsWith("v");
+                let tilePos = new Vector2(tile.X / tile.Parent.TileSize, tile.Y / tile.Parent.TileSize);
+                let ck = v.length > 2 && v[2].toLowerCase().startsWith("c");
+                tile.Parent.AddDoor(tilePos, pos, vertical, ck);
+                break;
+        }
+
     }
 
 }

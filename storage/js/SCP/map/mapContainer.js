@@ -4,8 +4,9 @@ import {cursor} from "/storage/js/framework/objects/graphic/cursor.js";
 import {Container} from "/storage/js/framework/objects/graphic/Container.js";
 import {Vector2, Color, Rectangle} from "/storage/js/framework/data.js";
 import { Box } from "/storage/js/framework/objects/graphic/Box.js";
+import { Door } from "/storage/js/SCP/Entities/map/door.js"
 
-let DEBUGCOLLIDES = true;
+let DEBUGCOLLIDES = false;
 
 export class MapContainer extends Container {
     Tiles;
@@ -20,9 +21,12 @@ export class MapContainer extends Container {
 
     Update() {
         super.Update();
+        this.Tiles.forEach(s => s.Update())
         this.Position = new Vector2(0-GameBase.Instance.Context.PlayerPosition.X + 960, 0-GameBase.Instance.Context.PlayerPosition.Y + 540);
         
     }
+
+    
 
     AddTile(Sprite, Position) {
         Sprite.Parent = this;
@@ -30,6 +34,27 @@ export class MapContainer extends Container {
         Sprite.Position = new Vector2(Position.X*this.TileSize, Position.Y*this.TileSize);
         Sprite.MakeColliders();
         this.Tiles.push(Sprite);
+    }
+
+    AddDoor(TilePosition, DoorPosition, isVertical, Checkpoint) {
+        let size;
+        let position;
+        let colliderSize = this.TileSize / 12;
+        if (isVertical) {
+            size = new Vector2(colliderSize, colliderSize*2);
+            position = new Vector2((TilePosition.X * this.TileSize) + (DoorPosition.X * colliderSize) - (colliderSize/2), (TilePosition.Y * this.TileSize) + (DoorPosition.Y * colliderSize))
+        }
+        else {
+            size = new Vector2( (this.TileSize / 12)*2, this.TileSize / 12);
+            position = new Vector2((TilePosition.X * this.TileSize) + (DoorPosition.X * colliderSize), (TilePosition.Y * this.TileSize) + (DoorPosition.Y * colliderSize) - (colliderSize/2))
+        }
+
+        let t = new Door(Checkpoint);
+        t.Parent = this;
+        t.Position = position;
+        t.Size = size;
+        t.Load();
+        this.Tiles.unshift(t);
     }
 
 
@@ -42,20 +67,28 @@ export class MapContainer extends Container {
             let SpriteCenterPos = new Vector2(sprite.Position.X + sprite.Size.X/2, sprite.Position.Y + sprite.Size.Y/2)
             
             
+            if (sprite.hasOwnProperty("Openned")) {
+                r = (PlayerSize / 4) + (Math.min(sprite.Size.X, sprite.Size.Y)/2)
+            }
             
             if (Math.abs(p1.X - SpriteCenterPos.X) < r && Math.abs(p1.Y - SpriteCenterPos.Y) < r) {
-                /*if (DEBUGCOLLIDES) {
+                if (DEBUGCOLLIDES) {
                     if (!this.Children.some(e => typeof e == "Box")) {
-                        let t = new Box(sprite.Position, sprite.Size, -2, 0, 0.5, new Color(200,255,200))
+                        let t = new Box(sprite.Position, sprite.Size, -2, 0, 0.05, new Color(200,255,200))
                         this.Add(t);
                         this.Scheduler.AddDelayed(() => this.Remove(t), 100)
                     }
 
-                } */
-        
+                }
+                
+                if (sprite.hasOwnProperty("Openned")) {
+                    r = (PlayerSize / 4) + (Math.min(sprite.Size.X, sprite.Size.Y)/2)
+                    return !sprite.Openned
+                }
 
                 return sprite.Colliders.some(p2 => {
-                    /*if (DEBUGCOLLIDES) {
+                    /*
+                    if (DEBUGCOLLIDES) {
                         let t = new Box(new Vector2(sprite.X + p2.X, sprite.Y + p2.Y), new Vector2(sprite.TileSize, sprite.TileSize), -2, 0, 1, new Color(50,255,50))
                         this.Add(t);
                         this.Scheduler.AddDelayed(() => this.Remove(t), 50)
@@ -73,11 +106,12 @@ export class MapContainer extends Container {
 
     CollideAtPoint(p1, size=1) {
         return this.Tiles.some(sprite => {
-          
             
             if ((p1.X > sprite.X && p1.X < sprite.X + sprite.Width) && (p1.Y > sprite.Y && p1.Y < sprite.Y + sprite.Height)) {
                 
- 
+                if (sprite.hasOwnProperty("Openned")) {
+                    return !sprite.Openned;
+                }
                 return sprite.Colliders.some(container => {
                     return (p1.X > sprite.X + container.X && p1.X < sprite.X + container.X + container.Width) && (p1.Y > sprite.Y + container.Y && p1.Y < sprite.Y + container.Y + container.Height);
                 });

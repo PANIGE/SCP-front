@@ -30,7 +30,7 @@ export class Player extends Container {
 
         this.pSize = size;
 
-        this.Add(new Sprite(Vector2.Zero,new Vector2(size, size), -1, 0, "/storage/img/guard.png", 1, Color.White));
+        this.Add(new Sprite(Vector2.Zero,new Vector2(size, size), -1, 270, "/storage/img/player.png", 1, Color.White));
         this.FoV = new Sprite(new Vector2(-1500 + size/2,-1500+size/2),new Vector2(3000,3000), 1, 0, "/storage/img/FoV.png", 0.9, Color.White);
         this.Add(this.FoV);
 

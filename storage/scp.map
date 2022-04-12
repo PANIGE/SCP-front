@@ -1,24 +1,22 @@
 //init
 
-X : /storage/img/roomX.png
+X: /storage/img/rooms/roomX.png
 S: Spawn/X
-1: /storage/img/roomT1.png
-2: /storage/img/roomT2.png
-3: /storage/img/roomT3.png
-4: /storage/img/roomT4.png
+1: /storage/img/rooms/roomT1.png
+2: /storage/img/rooms/roomT2.png
+3: /storage/img/rooms/roomT3.png
+4: /storage/img/rooms/roomT4.png
 
-5: /storage/img/roomC1.png
-6: /storage/img/roomC2.png
-7: /storage/img/roomC3.png
-8: /storage/img/roomC4.png
+5: /storage/img/rooms/roomC1.png
+6: /storage/img/rooms/roomC2.png
+7: /storage/img/rooms/roomC3.png
+8: /storage/img/rooms/roomC4.png
 
-C: /storage/img/roomCheckpointU.png
-H: /storage/img/roomCheckpointD.png
+C: /storage/img/rooms/roomCheckpointU.png
+H: /storage/img/rooms/roomCheckpointD.png
 
-|: /storage/img/roomI1.png
--: /storage/img/roomI2.png
-
-0: /storage/img/emptyCollider.png
+|: /storage/img/rooms/roomI1.png
+-: /storage/img/rooms/roomI2.png
 
 ---
 
@@ -26,8 +24,8 @@ H: /storage/img/roomCheckpointD.png
 | | |
 8-S-5
   |
-  C 
-  H
-  |
+  C  
+  H 
+  | 
   8-3-6
     8-5
