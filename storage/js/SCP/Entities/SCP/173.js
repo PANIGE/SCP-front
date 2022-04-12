@@ -45,6 +45,8 @@ export class SCP173 extends SCPBase
     WasMoving;
     JumpScareSound;
     NearSound;
+
+    Wandering
     constructor(position) {
         
         let size = 90;
@@ -54,15 +56,29 @@ export class SCP173 extends SCPBase
         this.JumpScareSound = new Audio("/storage/sounds/scp/173/JumpScare.ogg");
         this.NearSound = new Audio("/storage/sounds/scp/173/Nearing.ogg");
 
+        this.Wandering = [
+            new Audio("/storage/sounds/scp/173/Wandering1.ogg"),
+            new Audio("/storage/sounds/scp/173/Wandering2.ogg"),
+            new Audio("/storage/sounds/scp/173/Wandering3.ogg")
+        ]
+
     }
 
 
 
     Update() {
 
-        //console.log(isInSight)
-        
+        let vol = Math.abs((Math.min(1000, this.PlayerDist) - 1000)/1000)*0.5;
+        if (isNaN(vol)) {
+            vol = 0.5;
+        }
+        this.Wandering.forEach(s => s.volume = vol)
+
         super.Update();
+        if (Math.random()*1000 < 5) {
+            let t = Math.floor(Math.random()*2);
+            this.Wandering[t].play()
+        }
         let speed = Math.min(50, this.PlayerDist)
         if (this.WasMoving && this.IsInSight && !GameBase.Instance.Context.Blinking) {
             this.WasMoving = false;
@@ -73,18 +89,33 @@ export class SCP173 extends SCPBase
                 this.NearSound.play();
             }
         }
-        if (this.HasInSight && (GameBase.Instance.Context.Blinking || !this.IsInSight)) {
+        //console.warn(this.HasInSight)
+        if (this.HasInSight && ((GameBase.Instance.Context.Blinking && !this.WasMoving) || !this.IsInSight)) {
             //can move !
+            
+            let blinkMove = (GameBase.Instance.Context.Blinking && !this.WasMoving);
+            if (blinkMove) {
+                speed = Math.min(this.PlayerDist, 600);
+            }
+
             let angle;
             if (this.Position.X - GameBase.Instance.Context.PlayerPosition.X < 0) {
                 angle = 360 - find_angle(new Vector2(this.Position.X, this.Position.Y+960), GameBase.Instance.Context.PlayerPosition, this.Position)+90;
+                
             }
             else {
                 angle = find_angle(new Vector2(this.Position.X, this.Position.Y+960), GameBase.Instance.Context.PlayerPosition, this.Position)+90;
+                
             }
             this.Rotation = 90 - angle;
+            if (isNaN(angle)) {
+                angle = 0;
+            }
             angle = angle * (Math.PI/180);
             this.Position = new Vector2(this.Position.X+Math.cos(angle)*speed,this.Position.Y + Math.sin(angle)*speed);
+            
+         
+            
             this.WasMoving = true;
         }
         /*

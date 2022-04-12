@@ -11,6 +11,7 @@ export class OverlayManager extends Container {
     
     FrameRate;
     FrameTimeSprite;
+    PlayerPos;
     BlinkMeter;
     SprintMeter;
 
@@ -33,13 +34,16 @@ export class OverlayManager extends Container {
         }
         this.BlinkMeter.Size.X = (blink / 100) * 498;
         this.SprintMeter.Size.X = (GameBase.Instance.Context.Endurance / 100) * 498;
+        this.PlayerPos.Text = `(${Math.floor(GameBase.Instance.Context.PlayerPosition.X)}, ${Math.floor(GameBase.Instance.Context.PlayerPosition.Y)})`
     }
 
     Load() {
         this.FrameRate = new SpriteText(Vector2.Zero, new Vector2(200,20), -4, 0, "0Fps", "Arial", 1, Color.White);
         this.FrameTimeSprite = new SpriteText(new Vector2(0,20), new Vector2(200,20), -4, 0, "0ms", "Arial", 1, Color.White);
+        this.PlayerPos = new SpriteText(new Vector2(0,40), new Vector2(200,20), -4, 0, "(0,0)", "Arial", 1, Color.White);
         this.Add(this.FrameRate);
         this.Add(this.FrameTimeSprite);
+        this.Add(this.PlayerPos);
 
         this.Add(new Box(new Vector2(60,950), new Vector2(500,40), 0, 0, 1, new Color(100,100,100)));
         this.Add(new Box(new Vector2(61,951), new Vector2(498,38), -0.5, 0, 1, new Color(50,50,50)));

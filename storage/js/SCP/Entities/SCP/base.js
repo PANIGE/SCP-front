@@ -5,7 +5,7 @@ import {Container} from "/storage/js/framework/objects/graphic/Container.js";
 import {Vector2, Color} from "/storage/js/framework/data.js";
 import { Box } from "/storage/js/framework/objects/graphic/Box.js";
 
-let DEBUGSIGHT = true;
+let DEBUGSIGHT = false;
 
 function find_angle(p0,p1,c) {
     //https://stackoverflow.com/questions/1211212/how-to-calculate-an-angle-from-three-points
@@ -77,9 +77,9 @@ export class SCPBase extends Sprite
     get HasInSight() { //If SCP see player
         if (!GameBase.Instance.Context.PlayerPosition)
             return false;
-        if (this.PlayerDist > 3000)
+        if (this.PlayerDist > 1500)
             return false; //Range view of 3000
-        let CheckCount = Math.max(Math.floor(this.PlayerDist / 10), 3);
+        let CheckCount = Math.max(Math.floor(this.PlayerDist / 100), 3);
         
         let DistCheck = this.PlayerDist/CheckCount;
 
@@ -96,11 +96,20 @@ export class SCPBase extends Sprite
             }
             angle = angle * (Math.PI/180)
             
- 
-            //this.Parent.Add(new Box(new Vector2(this.Position.X+Math.cos(angle)*toCheck,this.Position.Y + Math.sin(angle)*toCheck), new Vector2(5,5), -5, 0, 1, Color.White));
-            if (this.Parent.CollideAtPoint(
-                new Vector2(this.CenterPosition.X+Math.cos(angle)*toCheck,this.CenterPosition.Y + Math.sin(angle)*toCheck)
-            )) {
+            
+            if (DEBUGSIGHT) {
+                let t = new Box(new Vector2(this.Position.X+Math.cos(angle)*toCheck,this.Position.Y + Math.sin(angle)*toCheck), new Vector2(5,5), -5, 0, 1, Color.White);
+                this.Parent.Add(t);
+                this.Scheduler.AddDelayed(() => this.Parent.Remove(t), 50)
+            }
+            
+            if (this.Parent.CollideAtPoint(new Vector2(this.CenterPosition.X+Math.cos(angle)*toCheck,this.CenterPosition.Y + Math.sin(angle)*toCheck))) {
+
+                if (DEBUGSIGHT) {
+                    let t = new Box(new Vector2(this.Position.X+Math.cos(angle)*toCheck,this.Position.Y + Math.sin(angle)*toCheck), new Vector2(5,5), -5, 0, 1, new Color(255,0,0));
+                    this.Parent.Add(t);
+                    this.Scheduler.AddDelayed(() => this.Parent.Remove(t), 50)
+                }
                 return false;
             }
             

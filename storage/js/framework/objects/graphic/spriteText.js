@@ -20,7 +20,7 @@ export class SpriteText extends Drawable {
             return;
         txt.style.fontFamily = this.Font;
         txt.innerHTML = this.Text;
-        txt.style.fontSize = this.Size.Y * GameBase.Instance.GetRatioMultiplier();
+        txt.style.fontSize = this.Size.Y * GameBase.Instance.GetRatioMultiplier() + "px";
         txt.style.color = `rgb(${this.Color.R}, ${this.Color.G}, ${this.Color.B})`;
         return txt;
         

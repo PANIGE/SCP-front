@@ -41,7 +41,7 @@ export class Game extends GameBase {
         this.Overlays = new OverlayManager();
         this.SpriteManager.Add(this.Overlays);
 
-        this.Map.Add(new SCP173(new Vector2(1000,700)))
+        this.Map.Add(new SCP173(new Vector2(3700,2500)))
     
     }
     
