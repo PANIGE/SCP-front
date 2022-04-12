@@ -1,27 +1,33 @@
 //init
-O : /storage/img/TileFloor1.png
-S : Spawn/0
-0 : /storage/img/TileFloor1-1.png
-W : /storage/img/TileWall1.png
-D : /storage/img/TileWall2.png
+
+X : /storage/img/roomX.png
+S: Spawn/X
+1: /storage/img/roomT1.png
+2: /storage/img/roomT2.png
+3: /storage/img/roomT3.png
+4: /storage/img/roomT4.png
+
+5: /storage/img/roomC1.png
+6: /storage/img/roomC2.png
+7: /storage/img/roomC3.png
+8: /storage/img/roomC4.png
+
+C: /storage/img/roomCheckpointU.png
+H: /storage/img/roomCheckpointD.png
+
+|: /storage/img/roomI1.png
+-: /storage/img/roomI2.png
+
+0: /storage/img/emptyCollider.png
 
 ---
-WWWWWWWWWWWWWWW
-WOOOOOOOOOOOOOW
-WOOOSOOOOOOOOOW
-WOOOOOOOOOOOOOW
-WWWWWWWWOOOOOOW
-       WOOOOOOW
-       WOOOOOOW
-       WOOOOOOW
-WWWWWWWWOOOOOOWWWWWWWWWW
-WOOOOOOOOOOOOOOOOOOOOOOW
-WOOOOOOOOOOOOOOOOOOOOOOW
-WOOOOOOOOOOOOOOOOOOOOOOW
-WOOOOOOOOOOOOOOOOOOOOOOW
-WOOOOOOOOOOOOOOOOOOOOOOW
-WOOOOOOOOOOOOOOOOOOOOOOW
-WOOOOOOOOOOOOOOOOOOOOOOW
-WOOOOOOOOOOOOOOOOOOOOOOW
-WOOOOOOOOOOOOOOOOOOOOOOW
-WWWWWWWWWWWWWWWWWWWWWWWW
+
+7-3-6
+| | |
+8-S-5
+  |
+  C 
+  H
+  |
+  8-3-6
+    8-5

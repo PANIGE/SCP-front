@@ -5,6 +5,8 @@ import {Container} from "/storage/js/framework/objects/graphic/Container.js";
 import {Vector2, Color} from "/storage/js/framework/data.js";
 import { Box } from "/storage/js/framework/objects/graphic/Box.js";
 
+let DEBUGSIGHT = true;
+
 function find_angle(p0,p1,c) {
     //https://stackoverflow.com/questions/1211212/how-to-calculate-an-angle-from-three-points
     var p0c = Math.sqrt(Math.pow(c.X-p0.X,2)+
@@ -94,7 +96,7 @@ export class SCPBase extends Sprite
             }
             angle = angle * (Math.PI/180)
             
-            
+ 
             //this.Parent.Add(new Box(new Vector2(this.Position.X+Math.cos(angle)*toCheck,this.Position.Y + Math.sin(angle)*toCheck), new Vector2(5,5), -5, 0, 1, Color.White));
             if (this.Parent.CollideAtPoint(
                 new Vector2(this.CenterPosition.X+Math.cos(angle)*toCheck,this.CenterPosition.Y + Math.sin(angle)*toCheck)

@@ -16,7 +16,7 @@ export function MapParser(mapCont, txt) {
         if (line.startsWith("//")) {
             continue;
         }
-        if (line.startsWith("---")) {
+        if (line.startsWith("---") && current != "build") {
             current = "build";
             continue;
         }
@@ -57,7 +57,8 @@ export function ParseColliders(tile, txt) {
         let v = line.split('');
         let x = 0;
         v.forEach(e => {
-            if (e != " ") {
+            if (e == "0") {
+                console.log(e)
                 tile.AddCollider(new Vector2(x, y));
             }
             x++;
