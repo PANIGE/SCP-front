@@ -79,7 +79,7 @@ export class SCPBase extends Sprite
             return false;
         if (this.PlayerDist > 1500)
             return false; //Range view of 3000
-        let CheckCount = Math.max(Math.floor(this.PlayerDist / 100), 3);
+        let CheckCount = Math.max(Math.floor(this.PlayerDist / 50), 3);
         
         let DistCheck = this.PlayerDist/CheckCount;
 

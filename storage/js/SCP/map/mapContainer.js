@@ -36,7 +36,7 @@ export class MapContainer extends Container {
         this.Tiles.push(Sprite);
     }
 
-    AddDoor(TilePosition, DoorPosition, isVertical, Checkpoint) {
+    AddDoor(TilePosition, DoorPosition, isVertical, Checkpoint, level) {
         let size;
         let position;
         let colliderSize = this.TileSize / 12;
@@ -49,7 +49,7 @@ export class MapContainer extends Container {
             position = new Vector2((TilePosition.X * this.TileSize) + (DoorPosition.X * colliderSize), (TilePosition.Y * this.TileSize) + (DoorPosition.Y * colliderSize) - (colliderSize/2))
         }
 
-        let t = new Door(Checkpoint);
+        let t = new Door(Checkpoint, level);
         t.Parent = this;
         t.Position = position;
         t.Size = size;

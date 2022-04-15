@@ -7,11 +7,13 @@ export class SpriteText extends Drawable {
     Text;
     Font;
 
+    Centered;
 
     constructor(Position, Size, Depth, Rotation, Text, Font, Alpha, Color) {
         super(Position, Size, Depth, Rotation, Alpha, Color);
-        this.Texture = Text;
+        this.Text = Text;
         this.Font = Font;
+        this.Centered = false;
     }
 
     Draw() {
@@ -22,6 +24,9 @@ export class SpriteText extends Drawable {
         txt.innerHTML = this.Text;
         txt.style.fontSize = this.Size.Y * GameBase.Instance.GetRatioMultiplier() + "px";
         txt.style.color = `rgb(${this.Color.R}, ${this.Color.G}, ${this.Color.B})`;
+        if (this.Centered) {
+            txt.style.textAlign = "center";
+        }
         return txt;
         
     }

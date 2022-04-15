@@ -34,11 +34,12 @@ export class Color {
     }
 
     static Lerp(v1, v2, ratio) {
-        let Col = new Color(0,0,0);
+        let col = new Color(0,0,0);
         col.R = v1.R + (v2.R - v1.R)*ratio;
         col.G = v1.G + (v2.G - v1.G)*ratio;
         col.B = v1.B + (v2.B - v1.B)*ratio;
-        return Col;
+        console.log(v1.R, v2.R, ratio)
+        return col;
     }
 
     static get White() {

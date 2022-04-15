@@ -48,7 +48,6 @@ export class GameBase {
     Load(e) {
         GameBase.Instance = this;
         this.Canvas = e;
-        console.log(this.GetRatioMultiplier());
         
         this.Canvas.addEventListener('contextmenu', event => event.preventDefault());
         this.Canvas.addEventListener('mousemove', (e) => {
@@ -78,7 +77,6 @@ export class GameBase {
 
 
     MainLoop() {
-        
         GameBase.Instance.Canvas.style.height = 1080 * GameBase.Instance.GetRatioMultiplier() + "px";
         GameBase.Instance.Canvas.style.width = 1920 * GameBase.Instance.GetRatioMultiplier()+ "px";
         GameBase.Instance.HandleEvents();

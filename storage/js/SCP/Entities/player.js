@@ -22,6 +22,11 @@ export class Player extends Container {
     Preload;
     pSize;
     ViewTriangle;
+
+    get Inventory() {
+        return GameBase.Instance.Overlays.Inventory;
+    }
+
     constructor() {
         
         let size = 90;

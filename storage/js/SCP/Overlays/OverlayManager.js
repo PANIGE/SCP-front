@@ -5,6 +5,7 @@ import {Container} from "/storage/js/framework/objects/graphic/Container.js";
 import {Box} from "/storage/js/framework/objects/graphic/Box.js";
 import {Vector2, Color} from "/storage/js/framework/data.js";
 import {SpriteText} from "/storage/js/framework/objects/graphic/spriteText.js";
+import { Inventory } from "/storage/js/SCP/Objects/Inventory.js";
 
 
 export class OverlayManager extends Container {
@@ -20,6 +21,10 @@ export class OverlayManager extends Container {
     BlinkMask;
 
     InterractIcon;
+
+    CurrentText;
+
+    Inventory;
 
     constructor() {
         super(Vector2.Zero, new Vector2(1920,1080), -4, 0, 1, Color.White);
@@ -80,6 +85,27 @@ export class OverlayManager extends Container {
         this.Add(this.BlinkMeter);
         this.Add(this.SprintMeter);
         this.Add(this.BlinkMask);
+
+        this.Inventory = new Inventory();
+        this.Add(this.Inventory);
+    }
+
+    ShowMessage(text) {
+        if (this.CurrentText != undefined) {
+            this.Remove(this.CurrentText);
+        }
+        console.log(text)
+        let t = new SpriteText(new Vector2(660,600), new Vector2(600, 20), -4, 0, text, "system-ui",1, Color.White);
+        t.Centered = true;
+        t.FadeOutFromOne(5000);
+        this.CurrentText = t;
+        this.Add(t)
+        this.Scheduler.AddDelayed(() => {
+            try {
+                this.Remove(t);
+            }
+            catch {}
+        }, 5000);
     }
 
 }

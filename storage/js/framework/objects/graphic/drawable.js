@@ -78,6 +78,15 @@ export class Drawable {
         this.FadeTo(0, time);
     }
 
+    FadeColorTo(Color, time) {
+        let current = this.CurrentTransformState;
+        let future = TransformState.Empty;
+        future.Color = Color;
+        future.Time = Date.now() + time;
+        let transform = new Transform(current, future);
+        this.Transforms.push(transform);
+    }
+
     FadeInFromZero(time) {
         this.Alpha = 0;
         this.FadeTo(1, time);
