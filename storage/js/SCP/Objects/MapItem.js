@@ -17,6 +17,9 @@ export class MapItem extends Sprite {
     get PlayerDist() { return Math.sqrt(Math.pow(GameBase.Instance.Context.PlayerPosition.X - (this.CenterPosition.X),2) + Math.pow(GameBase.Instance.Context.PlayerPosition.Y - (this.CenterPosition.Y),2));}
 
 
+    
+
+
     GetInventoryItem() {
         
     }

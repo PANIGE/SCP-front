@@ -24,6 +24,7 @@ export function MapParser(mapCont, txt) {
             case "init":
                 v = line.split(":");
                 tex[v[0].trim()] = v[1].trim()
+                GameBase.Instance.Cache(v[1].trim())
                 break;
             case "build":
                 v = line.split('');
@@ -32,7 +33,7 @@ export function MapParser(mapCont, txt) {
                 v.forEach(e => {
                     if (tex.hasOwnProperty(e)) {
                         if (tex[e].toLowerCase().startsWith("spawn/")) {
-                            GameBase.Instance.Context.PlayerPosition = new Vector2(x*mapCont.TileSize + mapCont.TileSize/2, y*mapCont.TileSize + mapCont.TileSize/2);
+                            GameBase.Instance.Context.PlayerPosition = new Vector2(x*mapCont.TileSize + mapCont.TileSize*0.4, y*mapCont.TileSize + mapCont.TileSize*0.6);
                             mapCont.AddTile(new Tile(tex[tex[e].split("/")[1]]), new Vector2(x, y));
                         }
                         else {

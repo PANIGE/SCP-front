@@ -12,6 +12,8 @@ export class Door extends Container
     Operating;
     static OpenSound;
     static CloseSound;
+    static KeyPass;
+    static KeyFail;
 
     static Checkpoint;
     static CheckpointList;
@@ -21,6 +23,8 @@ export class Door extends Container
     door2;
 
     Level;
+
+    Locked;
 
     constructor(ck = false, level=0) {
         super(Vector2.Zero, Vector2.Zero, -1, 0, 1, Color.White);
@@ -34,6 +38,8 @@ export class Door extends Container
             Door.OpenSound = new Audio("/storage/sounds/doors/DoorOpen.ogg");
             Door.CloseSound = new Audio("/storage/sounds/doors/DoorClose.ogg");
             Door.Checkpoint =  new Audio("/storage/sounds/doors/DoorCheckpoint.ogg");
+            Door.KeyPass =  new Audio("/storage/sounds/doors/KeycardPass.ogg");
+            Door.KeyFail =  new Audio("/storage/sounds/doors/KeycardFail.ogg");
             Door.CheckpointList = []
         }
 
@@ -41,6 +47,8 @@ export class Door extends Container
             Door.CheckpointList.push(this);
         }
         this.Level = level;
+
+        this.Locked = false;
     }
 
 
@@ -64,7 +72,6 @@ export class Door extends Container
 
     Update() {
         super.Update(); 
-        //this.Alpha = this.Openned ? 0 : 1;
         if (this.PlayerDist < 150 && !this.Operating) {
             GameBase.Instance.Focused = this;
         }
@@ -79,6 +86,11 @@ export class Door extends Container
             return;
         }
 
+        if (this.Locked) {
+            GameBase.Instance.Overlays.ShowMessage("This door seems to be blocked");
+            return;
+        }
+
         if (this.Level > 0 && (GameBase.Instance.Context.Player.Inventory.Equipped == undefined)) {
             GameBase.Instance.Overlays.ShowMessage("This door seems to require a keycard");
             return;
@@ -89,99 +101,105 @@ export class Door extends Container
         }
         else if (this.Level > 0 &&GameBase.Instance.Context.Player.Inventory.Equipped != undefined && GameBase.Instance.Context.Player.Inventory.Equipped.Level < this.Level) {
             GameBase.Instance.Overlays.ShowMessage("The card was inserted into the slot, but nothing seems to happen, try to get a higer keycard");
+            Door.KeyFail.play();
             return;
         }
         else if (this.Level > 0 &&GameBase.Instance.Context.Player.Inventory.Equipped != undefined && GameBase.Instance.Context.Player.Inventory.Equipped.Level >= this.Level) {
             GameBase.Instance.Overlays.ShowMessage("The card was inserted into the slot");
+            Door.KeyPass.play();
         }
         
         this.Operating = true;
-        if (this.Checkpoint) {
-            Door.CheckpointList.forEach(element => {
-                element.Operating = true;
-                element.door1.MoveTo(new Vector2(0-element.Width, 0), 1000);
-                element.door2.MoveTo(new Vector2(element.Width, element.Height/2), 1000);
-            });
-
-            Door.Checkpoint.pause();
-            Door.Checkpoint.currentTime = 0;
-            Door.Checkpoint.play();
-
-            this.Scheduler.AddDelayed(() => {
+        let waitTime = this.Level > 0 ? 773 : 0;
+        this.Scheduler.AddDelayed(() => {
+            if (this.Checkpoint) {
                 Door.CheckpointList.forEach(element => {
-                    element.Openned = true;
+                    element.Operating = true;
+                    element.door1.MoveTo(new Vector2(0-element.Width, 0), 1000);
+                    element.door2.MoveTo(new Vector2(element.Width, element.Height/2), 1000);
                 });
-            }, 1000);
 
-            this.Scheduler.AddDelayed(() => {
+                Door.Checkpoint.pause();
+                Door.Checkpoint.currentTime = 0;
                 Door.Checkpoint.play();
-                Door.CheckpointList.forEach(element => {
-                    element.door1.MoveTo(Vector2.Zero, 1000);
-                    element.door2.MoveTo(new Vector2(0, element.Height/2), 1000);
-                });
-            }, 6000);
-
-            this.Scheduler.AddDelayed(() => {
-                Door.CheckpointList.forEach(element => {
-                    element.Openned = false;
-                });
-            }, 6500);
-
-            this.Scheduler.AddDelayed(() => {
-                Door.CheckpointList.forEach(element => {
-                    element.Operating = false;
-                });
-            }, 7000);
-
-            
-
-
-        }
-        else {
-
-            let vert = this.Width < this.Height;
-
-            if (this.Openned) {
-                Door.CloseSound.play();
-
-                this.door1.MoveTo(Vector2.Zero, 1276);
-                if (vert) {
-                    this.door2.MoveTo(new Vector2(this.Width/2, 0), 1276);
-                }
-                else {
-                    this.door2.MoveTo(new Vector2(0, this.Height/2), 1276);
-                }
 
                 this.Scheduler.AddDelayed(() => {
-                    this.Openned = false;
-                },638);
+                    Door.CheckpointList.forEach(element => {
+                        element.Openned = true;
+                    });
+                }, 1000);
 
                 this.Scheduler.AddDelayed(() => {
-                    this.Operating = false;
-                }, 1276);
-            }
-            else {
-                Door.OpenSound.play();
+                    Door.Checkpoint.play();
+                    Door.CheckpointList.forEach(element => {
+                        element.door1.MoveTo(Vector2.Zero, 1000);
+                        element.door2.MoveTo(new Vector2(0, element.Height/2), 1000);
+                    });
+                }, 6000);
+
+                this.Scheduler.AddDelayed(() => {
+                    Door.CheckpointList.forEach(element => {
+                        element.Openned = false;
+                    });
+                }, 6500);
+
+                this.Scheduler.AddDelayed(() => {
+                    Door.CheckpointList.forEach(element => {
+                        element.Operating = false;
+                    });
+                }, 7000);
 
                 
-                if (vert) {
-                    this.door1.MoveTo(new Vector2(0, 0-this.Height), 1565);
-                    this.door2.MoveTo(new Vector2(this.Width/2, this.Height), 1565);
+
+
+            }
+            else {
+
+                let vert = this.Width < this.Height;
+
+                if (this.Openned) {
+                    Door.CloseSound.play();
+
+                    this.door1.MoveTo(Vector2.Zero, 1276);
+                    if (vert) {
+                        this.door2.MoveTo(new Vector2(this.Width/2, 0), 1276);
+                    }
+                    else {
+                        this.door2.MoveTo(new Vector2(0, this.Height/2), 1276);
+                    }
+
+                    this.Scheduler.AddDelayed(() => {
+                        this.Openned = false;
+                    },638);
+
+                    this.Scheduler.AddDelayed(() => {
+                        this.Operating = false;
+                    }, 1276);
                 }
                 else {
-                    this.door1.MoveTo(new Vector2(0-this.Width, 0), 1565);
-                    this.door2.MoveTo(new Vector2(this.Width, this.Height/2), 1565);
+                    Door.OpenSound.play();
+
+                    
+                    if (vert) {
+                        this.door1.MoveTo(new Vector2(0, 0-this.Height), 1565);
+                        this.door2.MoveTo(new Vector2(this.Width/2, this.Height), 1565);
+                    }
+                    else {
+                        this.door1.MoveTo(new Vector2(0-this.Width, 0), 1565);
+                        this.door2.MoveTo(new Vector2(this.Width, this.Height/2), 1565);
+                    }
+
+                    this.Scheduler.AddDelayed(() => {
+                        this.Openned = true;
+                    },782);
+
+                    this.Scheduler.AddDelayed(() => {
+                        this.Operating = false;
+                    }, 1565);
                 }
-
-                this.Scheduler.AddDelayed(() => {
-                    this.Openned = true;
-                },782);
-
-                this.Scheduler.AddDelayed(() => {
-                    this.Operating = false;
-                }, 1565);
             }
-        }
+
+        },waitTime);
 
 
     }

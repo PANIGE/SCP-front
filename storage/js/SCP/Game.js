@@ -54,28 +54,42 @@ export class Game extends GameBase {
         this.CanMove = true;
 
         let key1 = new MKeyCard1();
-        key1.Position = new Vector2(2755, 2497)
+        key1.Position = new Vector2(2500, 2497)
         this.Map.Add(key1)
 
         let key2 = new MKeyCard2();
-        key2.Position = new Vector2(2755, 2497)
+        key2.Position = new Vector2(2500, 2497)
         this.Map.Add(key2)
         
         let key3 = new MKeyCard3();
-        key3.Position = new Vector2(2755, 2497)
+        key3.Position = new Vector2(2500, 2497)
         this.Map.Add(key3)
 
         let key4 = new MKeyCard4();
-        key4.Position = new Vector2(2755, 2497)
+        key4.Position = new Vector2(2500, 2497)
         this.Map.Add(key4)
 
         let key5 = new MKeyCard5();
-        key5.Position = new Vector2(2755, 2497)
-        this.Map.Add(key5)
+        key5.Position = new Vector2(2500, 2497)
+        this.Map.Add(key5);
+
+
+        this.Start();
     
     }
     
 
+    Start() {
+        let bg = new Audio("/storage/sounds/music/BackgroundLoop.ogg");
+        bg.loop = true;
+        bg.volume = 0.4;
+        bg.play();
+
+        let intro = new Audio("/storage/sounds/Story/intro.mp3");
+        intro.play();
+
+        GameBase.Instance.Overlays.ShowMessage("Where the f*ck am i ?! SISTER ! I'M COMING !!!! WHERE ARE YOU !")
+    }
     
 
 

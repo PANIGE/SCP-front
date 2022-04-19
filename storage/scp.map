@@ -1,31 +1,39 @@
 //init
 
-X: /storage/img/rooms/roomX.png
-S: Spawn/X
-1: /storage/img/rooms/roomT1.png
-2: /storage/img/rooms/roomT2.png
-3: /storage/img/rooms/roomT3.png
-4: /storage/img/rooms/roomT4.png
+A: /storage/img/rooms/lightSpawn.png
+B: /storage/img/rooms/lightX.png
+C: /storage/img/rooms/lightI1.png
+D: /storage/img/rooms/lightI2.png
+E: /storage/img/rooms/lightC1.png
+F: /storage/img/rooms/lightC2.png
+G: /storage/img/rooms/lightC3.png
+H: /storage/img/rooms/lightC4.png
+I: /storage/img/rooms/lightT1.png
+J: /storage/img/rooms/lightT2.png
+K: /storage/img/rooms/lightT3.png
+L: /storage/img/rooms/lightT4.png
 
-5: /storage/img/rooms/roomC1.png
-6: /storage/img/rooms/roomC2.png
-7: /storage/img/rooms/roomC3.png
-8: /storage/img/rooms/roomC4.png
+M: /storage/img/rooms/lightI1Dclass.png
+N: /storage/img/rooms/lightI1DclassEnd.png
 
-C: /storage/img/rooms/roomCheckpointU.png
-H: /storage/img/rooms/roomCheckpointD.png
+O: /storage/img/rooms/lightDeadEnd1.png
+P: /storage/img/rooms/lightDeadEnd2.png
+Q: /storage/img/rooms/lightDeadEnd3.png
+R: /storage/img/rooms/lightDeadEnd4.png
 
-|: /storage/img/rooms/roomI1.png
--: /storage/img/rooms/roomI2.png
+S: Spawn/A
 
+T: /storage/img/rooms/roomCheckpointLHU.png
+U: /storage/img/rooms/roomCheckpointD.png
 ---
-
-7-3-6
-| | |
-8-S-5
-  |
-  C  
-  H 
-  | 
-  8-3-6
-    8-5
+    S
+    HF
+     C   Q
+ Q GDJGKDIDKP
+ HKJ HJC   C
+  HBP CLPNMJ
+ RKIDDJC   C
+  C   HBDKDIP
+  T      O
+  U
+ 

@@ -29,14 +29,14 @@ export class Player extends Container {
 
     constructor() {
         
-        let size = 90;
-        super(new Vector2(960-(size/2), 540-(size/2)), new Vector2(size, size), -1, 0, 1, Color.White);
+        let size = 80;
+        super(new Vector2(960-(size/2), 540-(size/2)), new Vector2(100, 100), -1, 0, 1, Color.White);
 
 
         this.pSize = size;
 
-        this.Add(new Sprite(Vector2.Zero,new Vector2(size, size), -1, 270, "/storage/img/player.png", 1, Color.White));
-        this.FoV = new Sprite(new Vector2(-1500 + size/2,-1500+size/2),new Vector2(3000,3000), 1, 0, "/storage/img/FoV.png", 0.9, Color.White);
+        this.Add(new Sprite(Vector2.Zero,new Vector2(100, 100), -1, 270, "/storage/img/player.png", 1, Color.White));
+        this.FoV = new Sprite(new Vector2(-1500 + 100/2,-1500+100/2),new Vector2(3000,3000), 1, 0, "/storage/img/FoV.png", 0.9, Color.White);
         this.Add(this.FoV);
 
 
