@@ -1,3 +1,4 @@
+
 import {Vector2} from "/storage/js/framework/data.js";
 import {GameBase} from "/storage/js/framework/GameBase.js";
 import { Tile } from "/storage/js/SCP/map/Tile.js";
@@ -28,40 +29,54 @@ export function MapParser(mapCont, txt) {
                 break;
             case "build":
                 v = line.split('');
-                
+                let l = [];
                 let x = 0;
                 v.forEach(e => {
                     if (tex.hasOwnProperty(e)) {
                         if (tex[e].toLowerCase().startsWith("spawn/")) {
                             GameBase.Instance.Context.PlayerPosition = new Vector2(x*mapCont.TileSize + mapCont.TileSize*0.4, y*mapCont.TileSize + mapCont.TileSize*0.6);
-                            mapCont.AddTile(new Tile(tex[tex[e].split("/")[1]]), new Vector2(x, y));
+                            let t = new Tile(tex[tex[e].split("/")[1]]);
+                            l.push(t);
+                            mapCont.AddTile(t, new Vector2(x, y));
                         }
                         else {
-                            mapCont.AddTile(new Tile(tex[e]), new Vector2(x, y));
+                            let t = new Tile(tex[e]);
+                            l.push(t);
+                            mapCont.AddTile(t, new Vector2(x, y));
                         }
                         
                     }
                     else {
-                        
-                        mapCont.AddTile(new Tile("/storage/img/rooms/emptyCollider.png"), new Vector2(x, y));
+                        let t = new Tile("/storage/img/rooms/emptyCollider.png");
+                        l.push(t);
+                        mapCont.AddTile(t, new Vector2(x, y));
                     }
                     x++;
                 });
+                mapCont.MapMatrix.push(l);
                 y++;
                 break;
         }
+        
     }
 }
+
+
 
 export function ParseColliders(tile, txt) {
 
     let toParse = txt.split("\n");
     let mode = "colliders";
+
     for (let y = 0; y < toParse.length; y++) {
         let line = toParse[y];
         let x = 0;
         let v;
         if (line.startsWith("---")) {
+            if(mode == "doors") {
+                mode = "graph";
+                continue;
+            }
             mode = "doors";
             continue;
         }
@@ -84,6 +99,10 @@ export function ParseColliders(tile, txt) {
                 let ck = v.length > 3 && v[3].toLowerCase().startsWith("c");
                 tile.Parent.AddDoor(tilePos, pos, vertical, ck, level);
                 break;
+            case "graph":
+                tile.Links = line.toUpperCase();
+                break;
+            
         }
 
     }

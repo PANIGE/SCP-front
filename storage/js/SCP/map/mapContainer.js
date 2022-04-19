@@ -4,19 +4,97 @@ import {cursor} from "/storage/js/framework/objects/graphic/cursor.js";
 import {Container} from "/storage/js/framework/objects/graphic/Container.js";
 import {Vector2, Color, Rectangle} from "/storage/js/framework/data.js";
 import { Box } from "/storage/js/framework/objects/graphic/Box.js";
-import { Door } from "/storage/js/SCP/Entities/map/door.js"
+import { Door } from "/storage/js/SCP/Entities/map/door.js";
+import { GraphNode } from "/storage/js/SCP/Entities/map/graphNode.js";
 
 let DEBUGCOLLIDES = false;
+
+export function CalculateGraph(MapContainer) {
+    let graphList = [];
+    for (let y = 0; y < MapContainer.MapMatrix.length;y++) {
+        let l = [];
+        for (let x= 0; x < MapContainer.MapMatrix[y].length;x++) {
+            let n = new GraphNode(new Vector2(x, y));
+            let e = MapContainer.GetMatrixPos(new Vector2(x, y));
+            
+            if (e != null) {
+                if (e.Links.includes("W")) {
+                    n.Add(new Vector2(x-1, y));
+                }
+                if (e.Links.includes("E")) {
+                    n.Add(new Vector2(x+1, y));
+                }
+                if (e.Links.includes("S")) {
+                    n.Add(new Vector2(x, y+1));
+                }
+                if (e.Links.includes("N")) {
+                    n.Add(new Vector2(x, y-1));
+                }
+                
+            }
+            l.push(n)
+            
+        }
+        graphList.push(l);
+    }
+    return graphList
+}
+
+export function RouteGraph(StartPos, EndPos) {
+    let graph = CalculateGraph(GameBase.Instance.Map);
+    return NextStep(EndPos, StartPos, graph, []);
+}
+
+export function NextStep(EndPos, CurrentPos, graph, used) {
+    let dists = [];
+    let c= graph[CurrentPos.Y][CurrentPos.X];
+    used.push(CurrentPos);
+
+    if (CurrentPos.X == EndPos.X && CurrentPos.Y == EndPos.Y) {
+        return used;
+    }
+    c.Connectors.forEach(s => {
+        if (!used.some(t => {return s.X == t.X && s.Y == t.Y} )) { 
+            let aa = NextStep(EndPos, s, graph, used);
+            dists.push(aa);
+        }
+        
+    });
+
+    
+    if (dists.length == 0) {
+        return {length: Infinity}
+    }
+    
+    var shortest = dists.reduce(function(p,c) {return p.length>c.length?c:p;},{length:Infinity});
+    console.log(dists, shortest)
+    return shortest;
+}
+
+
 
 export class MapContainer extends Container {
     Tiles;
     TileSize;
+    MapMatrix;
 
     constructor() {
         super(Vector2.Zero, Vector2.Zero, 5, 0, 1, Color.White);
         this.Tiles = [];
         this.TileSize = 1000;
         this.AlwaysPresent = true;
+        this.MapMatrix = [];
+        
+    }
+
+    GetMatrixPos(v) {
+        if (this.MapMatrix.length < v.Y)
+            return null;
+
+        if (this.MapMatrix[v.Y].length < v.X)
+            return null;
+
+        return this.MapMatrix[v.Y][v.X];
     }
 
     Update() {
@@ -131,6 +209,11 @@ export class MapContainer extends Container {
                 return;
             v.insertBefore(t, v.firstChild);
             });
+        
+    }
+
+    Load() {
+        this.Scheduler.AddDelayed(() => console.warn(RouteGraph(new Vector2(4,0), new Vector2(2,9))), 600)
         
     }
 }

@@ -10,10 +10,12 @@ import { ParseColliders } from "/storage/js/SCP/map/parser.js";
 export class Tile extends Sprite {
     Colliders;
     ColliderRect;
+    Links;
     constructor(Texture) {
         super(Vector2.Zero, Vector2.Zero, 5, 0,Texture, 1, Color.White);
         this.Colliders = [];
         this.colliderRect = 12; //Numbers of colliders per side
+        this.Links = "";
     }
 
     get TileSize() { return this.Parent.TileSize / this.colliderRect;  } 

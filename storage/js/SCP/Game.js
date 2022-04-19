@@ -50,7 +50,7 @@ export class Game extends GameBase {
         this.Overlays = new OverlayManager();
         this.SpriteManager.Add(this.Overlays);
 
-        this.Map.Add(new SCP173(new Vector2(4440,8500)));
+        this.Map.Add(new SCP173(new Vector2(2500,7000)));
         this.CanMove = true;
 
         let key1 = new MKeyCard1();
@@ -80,15 +80,18 @@ export class Game extends GameBase {
     
 
     Start() {
-        let bg = new Audio("/storage/sounds/music/BackgroundLoop.ogg");
-        bg.loop = true;
-        bg.volume = 0.4;
-        bg.play();
+        this.Scheduler.AddDelayed(() => {
+            let bg = new Audio("/storage/sounds/music/BackgroundLoop.ogg");
+            bg.loop = true;
+            bg.volume = 0.4;
+            bg.play();
+    
+            let intro = new Audio("/storage/sounds/Story/intro.mp3");
+            intro.play();
+    
+            GameBase.Instance.Overlays.ShowMessage("Where the f*ck am i ?! SISTER ! I'M COMING !!!! WHERE ARE YOU !");
+        }, 1000);
 
-        let intro = new Audio("/storage/sounds/Story/intro.mp3");
-        intro.play();
-
-        GameBase.Instance.Overlays.ShowMessage("Where the f*ck am i ?! SISTER ! I'M COMING !!!! WHERE ARE YOU !")
     }
     
 
