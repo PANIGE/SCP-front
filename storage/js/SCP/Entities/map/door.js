@@ -157,6 +157,7 @@ export class Door extends Container
 
                 let vert = this.Width < this.Height;
 
+    
                 if (this.Openned) {
                     Door.CloseSound.play();
 
@@ -180,6 +181,7 @@ export class Door extends Container
                     Door.OpenSound.play();
 
                     
+                    
                     if (vert) {
                         this.door1.MoveTo(new Vector2(0, 0-this.Height), 1565);
                         this.door2.MoveTo(new Vector2(this.Width/2, this.Height), 1565);
@@ -191,6 +193,32 @@ export class Door extends Container
 
                     this.Scheduler.AddDelayed(() => {
                         this.Openned = true;
+                        
+                        
+                        
+                        if (Math.random()*1000 < 100) {
+                            if (vert) {
+                                let before = this.Position.X < GameBase.Instance.Context.PlayerPosition.X;
+                                if (before) {
+                                    GameBase.Instance.SCP173.Position = new Vector2(this.Position.X - this.Parent.TileSize/3, this.Position.Y);
+                                }
+                                else {
+                                    GameBase.Instance.SCP173.Position = new Vector2(this.Position.X + this.Parent.TileSize/3, this.Position.Y);
+                                }
+                                
+                            }
+                            else {
+                                let before = this.Position.Y < GameBase.Instance.Context.PlayerPosition.Y;
+                                if (before) {
+                                    GameBase.Instance.SCP173.Position = new Vector2(this.Position.X, this.Position.Y- this.Parent.TileSize/3);
+                                }
+                                else {
+                                    GameBase.Instance.SCP173.Position = new Vector2(this.Position.X , this.Position.Y+ this.Parent.TileSize/3);
+                                }
+                            }
+                            GameBase.Instance.SCP173.SpottedSound.play();
+                        }
+        
                     },782);
 
                     this.Scheduler.AddDelayed(() => {

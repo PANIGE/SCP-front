@@ -40,22 +40,23 @@ export function CalculateGraph(MapContainer) {
     return graphList
 }
 
-export function RouteGraph(StartPos, EndPos) {
-    let graph = CalculateGraph(GameBase.Instance.Map);
-    return NextStep(EndPos, StartPos, graph, []);
-}
 
+
+//NICE, exponential Complexity !!! Don't have time to do better
 export function NextStep(EndPos, CurrentPos, graph, used) {
     let dists = [];
+    console.log(graph[CurrentPos.Y])
     let c= graph[CurrentPos.Y][CurrentPos.X];
+    if (c == undefined) {
+        return {length: Infinity}
+    }
     used.push(CurrentPos);
-
     if (CurrentPos.X == EndPos.X && CurrentPos.Y == EndPos.Y) {
         return used;
     }
     c.Connectors.forEach(s => {
         if (!used.some(t => {return s.X == t.X && s.Y == t.Y} )) { 
-            let aa = NextStep(EndPos, s, graph, used);
+            let aa = NextStep(EndPos, s, graph, [...used]);
             dists.push(aa);
         }
         
@@ -66,8 +67,7 @@ export function NextStep(EndPos, CurrentPos, graph, used) {
         return {length: Infinity}
     }
     
-    var shortest = dists.reduce(function(p,c) {return p.length>c.length?c:p;},{length:Infinity});
-    console.log(dists, shortest)
+    var shortest = dists.reduce(function(p,c) {return p.length<c.length?p:c;},{length:Infinity});
     return shortest;
 }
 
@@ -85,6 +85,11 @@ export class MapContainer extends Container {
         this.AlwaysPresent = true;
         this.MapMatrix = [];
         
+    }
+
+    RouteGraph(StartPos, EndPos) {
+        let graph = CalculateGraph(this);
+        return NextStep(EndPos, StartPos, graph, []);
     }
 
     GetMatrixPos(v) {
@@ -182,7 +187,7 @@ export class MapContainer extends Container {
         });
     }
 
-    CollideAtPoint(p1, size=1) {
+    CollideAtPoint(p1) {
         return this.Tiles.some(sprite => {
             
             if ((p1.X > sprite.X && p1.X < sprite.X + sprite.Width) && (p1.Y > sprite.Y && p1.Y < sprite.Y + sprite.Height)) {
@@ -212,8 +217,4 @@ export class MapContainer extends Container {
         
     }
 
-    Load() {
-        this.Scheduler.AddDelayed(() => console.warn(RouteGraph(new Vector2(4,0), new Vector2(2,9))), 600)
-        
-    }
 }

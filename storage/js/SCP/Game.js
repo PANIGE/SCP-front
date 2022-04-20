@@ -9,6 +9,8 @@ import { MapParser } from "/storage/js/scp/map/parser.js"
 import { Context } from "/storage/js/SCP/Context.js";
 import { Player } from "/storage/js/SCP/Entities/player.js";
 import { SCP173 } from "/storage/js/SCP/Entities/SCP/173.js";
+import { SCP096 } from "/storage/js/SCP/Entities/SCP/096.js";
+import { SCP106 } from "/storage/js/SCP/Entities/SCP/106.js";
 import { OverlayManager } from "/storage/js/SCP/Overlays/OverlayManager.js";
 import { MKeyCard1 } from "/storage/js/SCP/Objects/KeyCards/Key1.js";
 import { MKeyCard2 } from "/storage/js/SCP/Objects/KeyCards/Key2.js";
@@ -25,6 +27,10 @@ export class Game extends GameBase {
     Focused;
 
     CanMove;
+
+    SCP173;
+    SCP096;
+    SCP106;
 
     Load(canvas) {
         this.Focused = undefined;
@@ -50,11 +56,16 @@ export class Game extends GameBase {
         this.Overlays = new OverlayManager();
         this.SpriteManager.Add(this.Overlays);
 
-        this.Map.Add(new SCP173(new Vector2(2500,7000)));
+        this.SCP173 = new SCP173(new Vector2(1500,3500));
+        this.SCP096 = new SCP096(new Vector2(4700,800));
+        this.SCP106 = new SCP106();
+        this.Map.Add(this.SCP096);
+        this.Map.Add(this.SCP173);
+        this.Map.Add(this.SCP106);
         this.CanMove = true;
 
         let key1 = new MKeyCard1();
-        key1.Position = new Vector2(2500, 2497)
+        key1.Position = new Vector2(1123, 3373)
         this.Map.Add(key1)
 
         let key2 = new MKeyCard2();
@@ -70,11 +81,11 @@ export class Game extends GameBase {
         this.Map.Add(key4)
 
         let key5 = new MKeyCard5();
-        key5.Position = new Vector2(2500, 2497)
+        key5.Position = new Vector2(5491, 2034)
         this.Map.Add(key5);
 
 
-        this.Start();
+        //this.Start();
     
     }
     

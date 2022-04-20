@@ -43,7 +43,6 @@ export class SCP173 extends SCPBase
    
 
     WasMoving;
-    WasInSight;
 
     JumpScareSound;
     NearSound;
@@ -79,10 +78,7 @@ export class SCP173 extends SCPBase
         }
         this.Wandering.forEach(s => s.volume = vol);
 
-        if (!this.WasInSight && (this.IsInSight && this.HasInSight)) {
-            this.SpottedSound.play();
-        }
-        this.WasInSight = this.IsInSight;
+
 
         super.Update();
         if (Math.random()*1000 < 5) {

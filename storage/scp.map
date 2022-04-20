@@ -25,6 +25,22 @@ S: Spawn/A
 
 T: /storage/img/rooms/roomCheckpointLHU.png
 U: /storage/img/rooms/roomCheckpointD.png
+
+a: /storage/img/rooms/roomI1.png
+b: /storage/img/rooms/roomI2.png
+c: /storage/img/rooms/roomC1.png
+d: /storage/img/rooms/roomC2.png
+e: /storage/img/rooms/roomC3.png
+f: /storage/img/rooms/roomC4.png
+g: /storage/img/rooms/roomT1.png
+h: /storage/img/rooms/roomT2.png
+i: /storage/img/rooms/roomT3.png
+j: /storage/img/rooms/roomT4.png
+k: /storage/img/rooms/roomX.png
+
+m: /storage/img/rooms/roomServer.png
+
+n: /storage/img/rooms/room106.png
 ---
     S
     HF
@@ -36,4 +52,10 @@ U: /storage/img/rooms/roomCheckpointD.png
   C   HBDKDIP
   T      O
   U
- 
+  a   m
+  fbibgbbd 
+    a    a   
+   bkbbibx
+    a nkbc
+    fbbc
+         

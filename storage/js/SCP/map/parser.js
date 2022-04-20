@@ -91,13 +91,18 @@ export function ParseColliders(tile, txt) {
                 });
                 break;
             case "doors":
-                v = line.split(';')
-                let pos = new Vector2(parseInt(v[0].split(":")[0]), parseInt(v[0].split(":")[1]));
-                let vertical = v[1].toLowerCase().startsWith("v");
-                let tilePos = new Vector2(tile.X / tile.Parent.TileSize, tile.Y / tile.Parent.TileSize);
-                let level = v.length > 2 && !v[2].toLowerCase().startsWith("c") ? parseInt(v[2]) : 0
-                let ck = v.length > 3 && v[3].toLowerCase().startsWith("c");
-                tile.Parent.AddDoor(tilePos, pos, vertical, ck, level);
+                try {
+                    v = line.split(';')
+                    let pos = new Vector2(parseInt(v[0].split(":")[0]), parseInt(v[0].split(":")[1]));
+                    let vertical = v[1].toLowerCase().startsWith("v");
+                    let tilePos = new Vector2(tile.X / tile.Parent.TileSize, tile.Y / tile.Parent.TileSize);
+                    let level = v.length > 2 && !v[2].toLowerCase().startsWith("c") ? parseInt(v[2]) : 0
+                    let ck = v.length > 3 && v[3].toLowerCase().startsWith("c");
+                    tile.Parent.AddDoor(tilePos, pos, vertical, ck, level);
+                } catch (e) {
+                    console.warn("Silent Error : ", e)
+                }
+
                 break;
             case "graph":
                 tile.Links = line.toUpperCase();
