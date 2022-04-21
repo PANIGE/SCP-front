@@ -84,7 +84,7 @@ align-items: center;
 .options {
   width: 450px;
   height: 100%;
-  /* background-image: url("texture.jpg"); */
+  background-image: url("texture.jpg");
   background-color: rgb(76, 76, 76);
   display: flex;
   flex-direction: column;
@@ -147,7 +147,7 @@ align-items: center;
     opacity: 0;
   }
 }
--webkit-@keyframes round {
+@keyframes round {
   25% {
     opacity: 1;
     -webkit-opacity: 1;
