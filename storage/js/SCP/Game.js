@@ -178,7 +178,7 @@ export class Game extends GameBase {
             let intro = new Audio("/storage/sounds/Story/intro.mp3");
             intro.play();
     
-            GameBase.Instance.Overlays.ShowMessage("Where the f*ck am i ?! SISTER ! I'M COMING !!!! WHERE ARE YOU !");
+            GameBase.Instance.Overlays.ShowMessage("Where the f*ck am i ?! SISTER ! I'M COMING !!!! WHERE ARE YOU !<br><br><b>Z,Q,S,D</b> to move<br><b>F</b> for flashlight<br><b>E</b> to interract<br><b>Space</b> to blink");
         }, 1000);
 
     }

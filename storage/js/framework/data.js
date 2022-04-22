@@ -10,7 +10,7 @@ export class Vector2 {
         this.Y = y;
     }
     static Lerp(v1, v2, ratio) {
-        let Vec = new Vector2(0);
+        let Vec = new Vector2(0,0);
         Vec.X = v1.X + (v2.X - v1.X)*ratio;
         Vec.Y = v1.Y + (v2.Y - v1.Y)*ratio;
         return Vec;
@@ -20,6 +20,7 @@ export class Vector2 {
         return new Vector2(0,0);
     }
 }
+
 
 
 export class Color {
@@ -38,7 +39,6 @@ export class Color {
         col.R = v1.R + (v2.R - v1.R)*ratio;
         col.G = v1.G + (v2.G - v1.G)*ratio;
         col.B = v1.B + (v2.B - v1.B)*ratio;
-        console.log(v1.R, v2.R, ratio)
         return col;
     }
 
@@ -76,6 +76,8 @@ export class TransformState {
     }
     
 }
+
+
 
 export class Transform {
     State1;

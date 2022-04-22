@@ -12,6 +12,7 @@ export class SpriteManager {
         
     }
 
+
     HandleClick() {
         let toHandle = [...this.sprites].reverse()
         let stopPropagation = false;
