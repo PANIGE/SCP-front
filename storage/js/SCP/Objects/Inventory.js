@@ -29,7 +29,7 @@ export class Inventory extends Container {
 
     PickupItem(item) {
         if (this.StoredItem.length >= 6) {
-            GameBase.Instance.Overlays.ShowMessage("You carry too many objects to pickup that");
+            GameBase.Instance.Overlays.ShowMessage("You carry too many objects to pickup that<br>(Ctrl + click on item to drop it)");
             return;
         }
         GameBase.Instance.Map.Remove(item);

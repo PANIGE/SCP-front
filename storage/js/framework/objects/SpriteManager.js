@@ -83,7 +83,7 @@ export class SpriteManager {
     }
 
     Remove(Sprite) {
-        this.sprites.slice(this.sprites.indexOf(Sprite), 1)
+        this.sprites.splice(this.sprites.indexOf(Sprite), 1)
     }
 
     Clear() {

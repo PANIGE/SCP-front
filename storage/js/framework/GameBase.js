@@ -18,6 +18,8 @@ export class GameBase {
     cache;
     LastFrame;
 
+    Running;
+
     constructor() {
         this.SpriteManager = new SpriteManager();
         this.Running = true;
@@ -67,12 +69,35 @@ export class GameBase {
         document.addEventListener('keyup', (event) => {
             delete this.PressedKeys[event.key.toLowerCase()];
         });
-        setInterval(this.MainLoop, 0);
+        this.Running = setInterval(this.MainLoop, 0);
         
     }
 
     HandleEvents() {
         this.NewPressedKeys = {};
+    }
+
+    KillEngine() {
+        clearInterval(this.Running);
+
+    }
+
+    RestartEngine() {
+        /*
+        this.KillEngine();
+        this.SpriteManager = new SpriteManager();
+        this.Running = true;
+        this.MousePos = new Vector2(0,0);
+        this.Scheduler = new Scheduler();
+        this.PressedKeys = {};
+        this.NewPressedKeys = {};
+        this.cache = {"img" : [], "col" : {}};
+        this.LastFrame =  Date.now();
+        this.FrameTime = 16;
+
+        this.Load(this.Canvas);
+        */
+       location.reload();
     }
 
 
