@@ -25,16 +25,42 @@
         <div class="content">
           <div class="options">
             <div class="play">
-              <button id="play" type="button" href="">PLAY</button>
+              <script type="text/javascript">
+                new Audio();
+                var audio_click = new Audio();
+                audio_click.src = "click.mp3";
+
+                new Audio();
+                var audio_hover = new Audio();
+                audio_hover.src = "hover.mp3";
+              </script>
+              <button
+                id="play"
+                type="button"
+                onclick="audio_click.play();"
+                onmouseover="audio_hover.play();"
+                href=""
+              >
+                PLAY
+              </button>
             </div>
             <div class="members">
-              <button id="members" type="button" href="">THE TEAM</button>
+              <button
+                id="members"
+                type="button"
+                onmouseover="audio_hover.play();"
+                onclick="audio_click.play();;window.open('team.html')"
+                href=""
+              >
+                THE TEAM
+              </button>
             </div>
             <div class="github">
               <button
                 id="github"
                 type="button"
-                onclick=" window.open('https://github.com/PANIGE/SCP-front','_blank')"
+                onmouseover="audio_hover.play();"
+                onclick=" audio_click.play();window.open('https://github.com/PANIGE/SCP-front','_blank')"
               >
                 GITHUB
               </button>
