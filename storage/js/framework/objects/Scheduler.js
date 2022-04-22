@@ -23,6 +23,10 @@ export class Scheduler {
         })
     }
 
+    Clear() {
+        this.Tasks = [];
+    }
+
     Add(delegate, async=false) {
         this.Tasks.push(new Task(delegate, Date.now(), async));
     }

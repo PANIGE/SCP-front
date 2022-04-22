@@ -48,7 +48,8 @@ export class SCP173 extends SCPBase
     NearSound;
     SpottedSound;
 
-    Wandering
+    Wandering;
+    Killed;
     constructor(position) {
         
         let size = 90;
@@ -65,6 +66,7 @@ export class SCP173 extends SCPBase
             new Audio("/storage/sounds/scp/173/Wandering2.ogg"),
             new Audio("/storage/sounds/scp/173/Wandering3.ogg")
         ]
+        this.Killed = false;
 
     }
 
@@ -86,7 +88,7 @@ export class SCP173 extends SCPBase
             this.Wandering[t].play()
         }
         let speed = Math.min(50, this.PlayerDist)
-        if (this.WasMoving && this.IsInSight && !GameBase.Instance.Context.Blinking) {
+        if (this.WasMoving && this.IsInSight && !GameBase.Instance.Context.Blinking && !this.Killed) {
             this.WasMoving = false;
             if (this.PlayerDist < 300) {
                 this.JumpScareSound.play();
@@ -96,9 +98,14 @@ export class SCP173 extends SCPBase
             }
         }
         //console.warn(this.HasInSight)
-        if (this.HasInSight && ((GameBase.Instance.Context.Blinking && !this.WasMoving) || !this.IsInSight)) {
+        if (this.HasInSight && ((GameBase.Instance.Context.Blinking && !this.WasMoving) || !this.IsInSight && !this.Killed)) {
             //can move !
-            
+            if (this.PlayerDist < 50  && !GameBase.Instance.GodMode) {
+                this.Killed = true;
+                new Audio("/storage/sounds/SCP/173/NeckSnap.ogg").play();
+                this.position = Vector2.Zero;
+                GameBase.Instance.Kill("Cause of Death: Fatal cervical fracture. The surveillance tapes confirm that the subject was killed by SCP-173", "As a reminder to all MTF units, SCP-173 must be maintain in direct eye contact, and it's recommanded to blink before openning a door");
+            }
             let blinkMove = (GameBase.Instance.Context.Blinking && !this.WasMoving);
             if (blinkMove) {
                 speed = Math.min(this.PlayerDist, 600);

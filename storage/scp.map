@@ -1,5 +1,6 @@
 //init
 
+//Light Rooms
 A: /storage/img/rooms/lightSpawn.png
 B: /storage/img/rooms/lightX.png
 C: /storage/img/rooms/lightI1.png
@@ -26,6 +27,9 @@ S: Spawn/A
 T: /storage/img/rooms/roomCheckpointLHU.png
 U: /storage/img/rooms/roomCheckpointD.png
 
+V: /storage/img/rooms/lightKey2room.png
+
+// Heavy Rooms
 a: /storage/img/rooms/roomI1.png
 b: /storage/img/rooms/roomI2.png
 c: /storage/img/rooms/roomC1.png
@@ -41,21 +45,86 @@ k: /storage/img/rooms/roomX.png
 m: /storage/img/rooms/roomServer.png
 
 n: /storage/img/rooms/room106.png
+o: /storage/img/rooms/room096.png
+p: /storage/img/rooms/room173.png
+q: /storage/img/rooms/roomCheckpointHEU.png
+
+// Entrance rooms
+1: /storage/img/rooms/entranceI1.png
+2: /storage/img/rooms/entranceI11.png
+3: /storage/img/rooms/entranceI21.png
+4: /storage/img/rooms/entranceI2.png
+5: /storage/img/rooms/entranceI12.png
+6: /storage/img/rooms/entranceI22.png
+7: /storage/img/rooms/entranceX.png
+8: /storage/img/rooms/entranceX1.png
+9: /storage/img/rooms/entranceX2.png
+0: /storage/img/rooms/entranceFull1.png
+&: /storage/img/rooms/entranceFull2.png
+é: /storage/img/rooms/entranceFull3.png
+(: /storage/img/rooms/entranceT4.png
+): /storage/img/rooms/entranceT14.png
+[: /storage/img/rooms/entranceT24.png
+]: /storage/img/rooms/entranceT2.png
+{: /storage/img/rooms/entranceT12.png
+}: /storage/img/rooms/entranceT22.png
+-: /storage/img/rooms/entranceT1.png
+_: /storage/img/rooms/entranceT11.png
+ç: /storage/img/rooms/entranceT21.png
+à: /storage/img/rooms/entranceT3.png
+@: /storage/img/rooms/entranceT13.png
+=: /storage/img/rooms/entranceT23.png
++: /storage/img/rooms/entranceC4.png
+/: /storage/img/rooms/entranceC14.png
+*: /storage/img/rooms/entranceC24.png
+\: /storage/img/rooms/entranceC1.png
+!: /storage/img/rooms/entranceC11.png
+?: /storage/img/rooms/entranceC21.png
+.: /storage/img/rooms/entranceC2.png
+,: /storage/img/rooms/entranceC12.png
+;: /storage/img/rooms/entranceC22.png
+°: /storage/img/rooms/entranceC3.png
+§: /storage/img/rooms/entranceC13.png
+$: /storage/img/rooms/entranceC23.png
+€: /storage/img/rooms/entranceDeadEnd14.png
+^: /storage/img/rooms/entranceDeadEnd3.png
+¨: /storage/img/rooms/entranceDeadEnd12.png
+ù: /storage/img/rooms/entranceDeadEnd4.png
+%: /storage/img/rooms/entranceDeadEnd11.png
+µ: /storage/img/rooms/entranceDeadEnd1.png
+¤: /storage/img/rooms/entranceDeadEnd13.png
+£: /storage/img/rooms/entranceDeadEnd2.png
+
 ---
     S
     HF
-     C   Q
+     C   V
  Q GDJGKDIDKP
  HKJ HJC   C
   HBP CLPNMJ
  RKIDDJC   C
-  C   HBDKDIP
+  C   HIDKDIP
   T      O
   U
   a   m
-  fbibgbbd 
-    a    a   
-   bkbbibx
-    a nkbc
-    fbbc
-         
+  fbibgbbd   p
+    a    a   a
+  ebkbbibkbibh
+ oa a nkbgbc a
+ fc fbbc     a
+             q
+             U
+ °45.  §,  $à\
+ +; (@.1/;°!*,
+  2§?3+-€*76.1
+ $_] /;°=^);+\
+ *.*, +ç{ù?2¨;
+ §!$9.  3  [4}
+ /;%12°5-,§\$]
+  (6?){ %31 ¤2
+  £ °?3§0\£  1
+ $4.2 3[!  %ù?
+ *;+\°?*564&€%
+ µ/; +5.   £°!
+ (6\  §éà@=àç,
+ *4^$5?*_-ç?¨\

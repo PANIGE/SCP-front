@@ -56,6 +56,8 @@ export class SCP096 extends SCPBase
     UpdateIn;
 
     Path;
+
+    Killed;
    
     constructor(position) {
         
@@ -83,6 +85,8 @@ export class SCP096 extends SCPBase
 
         this.Speed = 3;
         this.Path = []
+
+        this.Killed = false;
         
     }
 
@@ -108,6 +112,11 @@ export class SCP096 extends SCPBase
     }
 
     Update() {
+
+        let FrameTime = Math.floor((Date.now() - this.LastFrame));
+        this.LastFrame = Date.now();
+        this.Speed = (FrameTime / 4)*2;
+
         super.Update();
         let vol = Math.abs((Math.min(1000, this.PlayerDist) - 1000)/1000)*0.5;
         if (isNaN(vol)) {
@@ -163,6 +172,16 @@ export class SCP096 extends SCPBase
                 this.Path = this.Parent.RouteGraph(pos96, playerpos);
             }
             
+
+            if (this.PlayerDist < 50 && !this.Killed && !GameBase.Instance.GodMode) {
+                this.Killed = true;
+                new Audio("/storage/sounds/SCP/096/Tear.ogg").play();
+                this.position = Vector2.Zero;
+                GameBase.Instance.Kill("Cause of Death: A large amount of blood found in [DATA REDACTED]. DNA identified as Subject D-9341. Most likely [DATA REDACTED] by SCP-096.", "As a reminder to all MTF units, You must NOT see the face of SCP-096, it's advised to disable your flashlight when interracting with him");
+                this.Scream.pause();
+                this.ChaseMusic.pause();
+                this.Active = false;
+            }
             
             let toGo;
             let p;
