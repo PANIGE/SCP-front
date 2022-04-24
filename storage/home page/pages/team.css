@@ -185,11 +185,11 @@ button {
 	border-style: solid;
   transition: 0.2s;
 	}
+
 button:hover{
   cursor: pointer;
   width: 210px;
   background-color: rgb(85, 0, 0);
-  /* color: black; */
   box-shadow: 0px 0px 32px 7px #000000;
   border: 1px solid white;
 }
