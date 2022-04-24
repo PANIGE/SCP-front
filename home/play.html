@@ -25,14 +25,13 @@
           <button
             class="btn_2"
             onmouseover="audio_hover.play();"
-            onclick="() => { audio_click.play(); window.location.href = \"/\"}"
-          >
+            onclick="audio_click.play(); window.location.href = '/app.html'">
             Play
           </button>
         </div>
         <div class="slider">
           <div class="img-box">
-            <img src="../images/1.png" class="slider-img" />
+            <img src="images/1.png" class="slider-img" />
           </div>
         </div>
         <div class="btn_bar">
@@ -45,11 +44,11 @@
     <script type="text/javascript">
       new Audio();
       var audio_click = new Audio();
-      audio_click.src = "../sounds/click.mp3";
+      audio_click.src = "sounds/click.mp3";
 
       new Audio();
       var audio_hover = new Audio();
-      audio_hover.src = "../sounds/hover.mp3";
+      audio_hover.src = "sounds/hover.mp3";
     </script>
   </body>
 </html>

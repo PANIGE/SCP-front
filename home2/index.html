@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="home-page.css" />
+    <link rel="stylesheet" href="/home/home-page.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>project SCP 3809</title>
     <link
@@ -28,18 +28,17 @@
               <script type="text/javascript">
                 new Audio();
                 var audio_click = new Audio();
-                audio_click.src = "../sounds/click.mp3";
+                audio_click.src = "click.mp3";
 
                 new Audio();
                 var audio_hover = new Audio();
-                audio_hover.src = "../sounds/hover.mp3";
+                audio_hover.src = "hover.mp3";
               </script>
               <button
                 id="play"
                 type="button"
-                onclick="audio_click.play();window.open('play.html')"
+                onclick="audio_click.play();window.location.href = '/app.html'"
                 onmouseover="audio_hover.play();"
-                href=""
               >
                 PLAY
               </button>
@@ -49,7 +48,7 @@
                 id="members"
                 type="button"
                 onmouseover="audio_hover.play();"
-                onclick="audio_click.play();window.open('team.html')"
+                onclick="audio_click.play();window.location.href = '/home/team.html'"
                 href=""
               >
                 THE TEAM
@@ -67,10 +66,10 @@
             </div>
           </div>
           <div class="preview">
-            <img class="photo" src="../images/laboratory.jpeg" alt="Image 1" />
-            <img class="photo" src="../images/candy.jpg" alt="Image 2" />
-            <img class="photo" src="../images/laboratory 3.jpg" alt="Image 3" />
-            <img class="photo" src="../images/laboratory 4.jpg" alt="Image 4" />
+            <img class="photo" src="/home/laboratory.jpeg" alt="Image 1" />
+            <img class="photo" src="/home/laboratory 2.jpg" alt="Image 2" />
+            <img class="photo" src="/home/laboratory 3.jpg" alt="Image 3" />
+            <img class="photo" src="/home/laboratory 4.jpg" alt="Image 4" />
           </div>
         </div>
         <div class="scp"></div>
