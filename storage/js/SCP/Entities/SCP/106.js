@@ -136,7 +136,7 @@ export class SCP106 extends SCPBase
                 this.Killed = true;
                 new Audio("/storage/sounds/SCP/106/laugh.mp3").play();
                 this.position = Vector2.Zero;
-                GameBase.Instance.Kill("Cause of Death: Subject D-9341. Body partially decomposed by what is assumed to be SCP-106's \"corrosion\" effect. Body disposed of via incineration.", "As a reminder to all MTF units, when SCP-106 appears, you must flee the entity as fast as you can. one contact is enough for him to terminate you.");
+                GameBase.Instance.Kill("Cause of Death: Body partially decomposed by what is assumed to be SCP-106's \"corrosion\" effect. Body disposed of via incineration.", "As a reminder to all MTF units, when SCP-106 appears, you must flee the entity as fast as you can. one contact is enough for him to terminate you.");
                 this.Bump.pause();
                 this.Breathing.pause();
                 this.Active = false;

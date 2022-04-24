@@ -48,6 +48,8 @@ export class Game extends GameBase {
 
     GodMode;
 
+
+
     Load(canvas) {
         this.Dead = false;
         this.Focused = undefined;
@@ -133,7 +135,7 @@ export class Game extends GameBase {
 
 
         this.Start();
-
+        
     }
 
     Kill(reason, toAvoid) {
@@ -176,6 +178,7 @@ export class Game extends GameBase {
             bg.play();
     
             let intro = new Audio("/storage/sounds/Story/intro.mp3");
+            intro.volume = 0.5;
             intro.play();
     
             GameBase.Instance.Overlays.ShowMessage("Where the f*ck am i ?! SISTER ! I'M COMING !!!! WHERE ARE YOU !<br><br><b>Z,Q,S,D</b> to move<br><b>F</b> for flashlight<br><b>E</b> to interract<br><b>Space</b> to blink");
@@ -262,7 +265,17 @@ export class Game extends GameBase {
     MainLoop() {
         
         super.MainLoop();
-        
+        if (GameBase.Instance.Context.PlayerPosition.X < 4832 && GameBase.Instance.Context.PlayerPosition.X > 4099 && GameBase.Instance.Context.PlayerPosition.Y > 31091 && !GameBase.Instance.Dead) {
+            GameBase.Instance.Dead = true;
+            GameBase.Instance.CanMove = false;
+            new Audio("/storage/sounds/Story/STOPRIGHTTHERE.mp3").play();
+
+            GameBase.Instance.Scheduler.AddDelayed(() => {
+                new Audio("/storage/sounds/Story/EndingDialog.ogg").play();
+                GameBase.Instance.Dead = false;
+                GameBase.Instance.Kill("Subject ███. Subject demonstrates extraordinary luck and complete mastery of even the most fatal of circumstances and an uncanny ability to predict even the most unpredictable of hazards, almost as if it has performed these impossible tasks several times before. Further testing is required to determine whether the subject should receive SCP classification.", "")
+            },10000)
+        }
     }
 
 }
