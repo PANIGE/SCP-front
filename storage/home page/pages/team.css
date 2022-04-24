@@ -1,0 +1,198 @@
+:root {
+  --primary-color: #0067cd;
+  --secondary-color: #001b5e;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+  }
+  body::-webkit-scrollbar {
+    display: none;
+  }
+
+  body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  }
+    
+  .bg {
+  
+    z-index: 0;
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    right: -50%;
+    bottom: -50%;
+    width: 200%;
+    height: 200vh;
+    background: transparent
+    url("http://assets.iceable.com/img/noise-transparent.png") repeat 0 0;
+    background-repeat: repeat;
+    animation: bg-animation 0.2s infinite;
+    opacity: 0.9;
+    visibility: visible;
+  }
+    
+  @keyframes bg-animation {
+    0% {
+      transform: translate(0, 0);
+    }
+    10% {
+      transform: translate(-5%, -5%);
+    }
+    20% {
+      transform: translate(-10%, 5%);
+    }
+    30% {
+      transform: translate(5%, -10%);
+    }
+    40% {
+      transform: translate(-5%, 15%);
+    }
+    50% {
+      transform: translate(-10%, 5%);
+    }
+    60% {
+      transform: translate(15%, 0);
+    }
+    70% {
+      transform: translate(0, 10%);
+    }
+    80% {
+      transform: translate(-15%, 0);
+    }
+    90% {
+      transform: translate(10%, 5%);
+    }
+    100% {
+      transform: translate(5%, 0);
+    }
+  }
+  h1 {
+    margin-left: 50px;
+    font-size: 90px;
+    color: rgba(255,255,255,.3);
+    background: #000000;
+    text-shadow: 0 0 15px rgba(255,255,255,.5), 0 0 10px rgba(255,255,255,.5);
+  }
+  h2{
+    margin-top: 10px;
+    color: white;
+
+  }
+  #logo {
+
+    margin-right: 50px;
+    height: 100px;
+    width: 100px;
+  }
+  .menu {
+    width: 100%;
+    height: 1200px;
+    background: rgb(0,0,0);
+    background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(47,47,47,1) 58%, rgba(70,70,70,1) 77%, rgba(102,95,95,1) 100%);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: space-between;
+  }
+  .pannel {
+    margin-top: 100px;
+    z-index: 2;
+    width:100%;
+    height:1000px;
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+  }
+  .block {
+    width:100%;
+    height:500px;
+    display: flex;
+    flex-direction: row;
+	  flex-wrap: nowrap;
+	  justify-content: space-evenly;
+	  align-items: center;
+	  align-content: center;
+  }
+  img {
+    z-index: 3;
+    width: 300px;
+    height: 300px;
+    object-fit:cover;
+    transform-origin:center;
+    transition:0.5s;
+  }
+  .pannel:hover #card {
+    opacity:0.3;
+  }
+  .pannel #card:hover {
+    opacity:1;
+    border: 1px solid white;
+    box-shadow: 0px 0px 32px 7px #000000;
+  }
+  .bar {
+    width: 100%;
+    height: 100px;
+    background-color: rgb(0, 0, 0);
+    display: flex;
+    justify-content: center;
+  }
+  #logo {
+    height: 100px;
+  }
+
+  #card{
+    height: 450px;
+    width: 300px;
+
+    border: 1px solid black;
+    background: rgb(35, 35, 35);
+    display: flex;
+    flex-direction: column;
+  }
+  .text_bar{
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+  }
+  .content_bar {
+    width: 300px;
+    height: 50px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+  }
+
+
+button {
+  z-index: 1;
+  margin-top: 30px;
+  position: absolute;
+  height: 40px;
+  width: 200px;
+  color: white;
+  background: none;
+  border: none;
+	border-style: solid;
+  transition: 0.2s;
+	}
+button:hover{
+  cursor: pointer;
+  width: 210px;
+  background-color: rgb(85, 0, 0);
+  /* color: black; */
+  box-shadow: 0px 0px 32px 7px #000000;
+  border: 1px solid white;
+}
+button:active {
+  width: 200px;
+}

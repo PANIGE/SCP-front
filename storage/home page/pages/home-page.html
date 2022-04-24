@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="home-page.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>project SCP 3809</title>
+    <link
+      rel="icon"
+      src="https://cutewallpaper.org/24/scp-logo-png/scp-foundation-containment-beach-towel-for-sale-by-balerante-work.png"
+    />
+  </head>
+
+  <body>
+    <div class="bg"></div>
+    <div class="menu">
+      <div class="bar">
+        <img
+          src="https://cutewallpaper.org/24/scp-logo-png/scp-foundation-containment-beach-towel-for-sale-by-balerante-work.png"
+          id="logo"
+        />
+        <h1>SCP 3809</h1>
+      </div>
+      <div class="pannel">
+        <div class="content">
+          <div class="options">
+            <div class="play">
+              <script type="text/javascript">
+                new Audio();
+                var audio_click = new Audio();
+                audio_click.src = "../sounds/click.mp3";
+
+                new Audio();
+                var audio_hover = new Audio();
+                audio_hover.src = "../sounds/hover.mp3";
+              </script>
+              <button
+                id="play"
+                type="button"
+                onclick="audio_click.play();window.open('play.html')"
+                onmouseover="audio_hover.play();"
+                href=""
+              >
+                PLAY
+              </button>
+            </div>
+            <div class="members">
+              <button
+                id="members"
+                type="button"
+                onmouseover="audio_hover.play();"
+                onclick="audio_click.play();window.open('team.html')"
+                href=""
+              >
+                THE TEAM
+              </button>
+            </div>
+            <div class="github">
+              <button
+                id="github"
+                type="button"
+                onmouseover="audio_hover.play();"
+                onclick=" audio_click.play();window.open('https://github.com/PANIGE/SCP-front','_blank')"
+              >
+                GITHUB
+              </button>
+            </div>
+          </div>
+          <div class="preview">
+            <img class="photo" src="../images/laboratory.jpeg" alt="Image 1" />
+            <img class="photo" src="../images/candy.jpg" alt="Image 2" />
+            <img class="photo" src="../images/laboratory 3.jpg" alt="Image 3" />
+            <img class="photo" src="../images/laboratory 4.jpg" alt="Image 4" />
+          </div>
+        </div>
+        <div class="scp"></div>
+      </div>
+    </div>
+  </body>
+</html>
