@@ -28,16 +28,16 @@
               <script type="text/javascript">
                 new Audio();
                 var audio_click = new Audio();
-                audio_click.src = "click.mp3";
+                audio_click.src = "../sounds/click.mp3";
 
                 new Audio();
                 var audio_hover = new Audio();
-                audio_hover.src = "hover.mp3";
+                audio_hover.src = "../sounds/hover.mp3";
               </script>
               <button
                 id="play"
                 type="button"
-                onclick="audio_click.play();"
+                onclick="audio_click.play();window.open('play.html')"
                 onmouseover="audio_hover.play();"
                 href=""
               >
@@ -67,10 +67,10 @@
             </div>
           </div>
           <div class="preview">
-            <img class="photo" src="laboratory.jpeg" alt="Image 1" />
-            <img class="photo" src="laboratory 2.jpg" alt="Image 2" />
-            <img class="photo" src="laboratory 3.jpg" alt="Image 3" />
-            <img class="photo" src="laboratory 4.jpg" alt="Image 4" />
+            <img class="photo" src="../images/laboratory.jpeg" alt="Image 1" />
+            <img class="photo" src="../images/candy.jpg" alt="Image 2" />
+            <img class="photo" src="../images/laboratory 3.jpg" alt="Image 3" />
+            <img class="photo" src="../images/laboratory 4.jpg" alt="Image 4" />
           </div>
         </div>
         <div class="scp"></div>
