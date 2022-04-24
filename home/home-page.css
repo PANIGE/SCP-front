@@ -83,7 +83,7 @@ align-items: center;
 .options {
   width: 450px;
   height: 100%;
-  background-image: url("../images/steel.jpg");
+  background-image: url("/home/images/steel.jpg");
   display: flex;
   flex-direction: column;
   align-items: center;
