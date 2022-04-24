@@ -1,6 +1,6 @@
 :root {
-    --primary-color: #0067cd;
-    --secondary-color: #001b5e;
+    --primary-color: #cd0000;
+    --secondary-color: #5e0000;
 }
   
 * {
@@ -40,7 +40,7 @@ h1 {
 }
 .menu {
     width: 100%;
-    height: 1200px;
+    height: 1000px;
     background: rgb(0,0,0);
     display: flex;
     flex-direction: column;
@@ -49,3 +49,124 @@ h1 {
     align-items: center;
     align-content: space-between;
 }
+
+.slider{
+	margin:50px auto;
+	width:50%;
+}
+.btn_bar{
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.btn_bar_2{
+    margin-bottom: 50px;
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.img-box img{
+	width:100%;
+}
+.slider{
+    width:100%;
+    height:500px;
+}
+.slider-img{
+    width:60%;
+    height:500px;
+}
+.btn{
+    z-index: 1;
+    height: 40px;
+    width: 200px;
+    color: white;
+    background: none;
+    border: none;
+	border-style: solid;
+    transition: 0.2s;		 
+}
+
+.btn:hover{
+    cursor: pointer;
+    width: 210px;
+    background-color: rgb(85, 0, 0);
+    box-shadow: 0px 0px 32px 7px #000000;
+    border: 1px solid white;
+  }
+
+  .btn_2 {
+    cursor: pointer;
+    height: 100px;
+    width: 350px;
+    margin-top: 100px;
+    background: var(--primary-color);
+    border: none;
+    box-shadow: -6px 6px 0 var(--secondary-color),-7px 9px 30px -1px black;
+    color: white;
+    cursor: pointer;
+    font-size: 50px;
+    padding: 1rem 2rem;
+    position: relative;
+    outline: none;
+    transition: 0.2s;
+  }
+  .btn_2:hover {
+    box-shadow: -9px 9px 0 var(--secondary-color),-7px 9px 30px 5px black;
+    left: 3px;
+    top: -3px;
+    transition: 0.1s;
+  }
+  .btn_2:active {
+    background-color: white;
+    color: rgb(255, 0, 0);
+    box-shadow: -3px 3px 0 var(--secondary-color);
+    left: -3px;
+    top: 3px;
+    transition: 0s;
+  }
+  
+  .btn_2::before {
+    position: absolute;
+    display: block;
+    content: "";
+    height: 0;
+    width: 0;
+    border: solid 6px transparent;
+    border-right: solid 6px var(--secondary-color);
+    border-left-width: 0;
+    background: none;
+    top: 0;
+    left: -6px;
+  }
+
+  .btn_2:after {
+    position: absolute;
+    display: block;
+    content: "";
+    height: 0;
+    width: 0;
+    border: solid 6px transparent;
+    border-top: solid 6px var(--secondary-color);
+    border-bottom-width: 0;
+    right: 0;
+    bottom: -6px;
+  }
+  
+  .btn_2:active::before {
+    border: solid 3px transparent;
+    border-right: solid 3px var(--secondary-color);
+    border-left-width: 0;
+    left: -3px;
+  }
+  
+  .btn_2:active::after {
+    border: solid 3px transparent;
+    border-top: solid 3px var(--secondary-color);
+    border-bottom-width: 0;
+    bottom: -3px;
+  }

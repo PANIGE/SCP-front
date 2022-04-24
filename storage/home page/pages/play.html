@@ -20,7 +20,36 @@
         />
         <h1>SCP 3809</h1>
       </div>
-      <div class="display"></div>
+      <div class="display">
+        <div class="btn_bar_2">
+          <button
+            class="btn_2"
+            onmouseover="audio_hover.play();"
+            onclick="audio_click.play();window.open('')"
+          >
+            Play
+          </button>
+        </div>
+        <div class="slider">
+          <div class="img-box">
+            <img src="../images/1.png" class="slider-img" />
+          </div>
+        </div>
+        <div class="btn_bar">
+          <button class="btn" onclick="prev()">Prev</button>
+          <button class="btn" onclick="next()">Next</button>
+        </div>
+      </div>
     </div>
+    <script src="play.js"></script>
+    <script type="text/javascript">
+      new Audio();
+      var audio_click = new Audio();
+      audio_click.src = "../sounds/click.mp3";
+
+      new Audio();
+      var audio_hover = new Audio();
+      audio_hover.src = "../sounds/hover.mp3";
+    </script>
   </body>
 </html>
